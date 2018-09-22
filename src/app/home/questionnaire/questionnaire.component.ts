@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class QuestionnaireComponent implements OnInit {
   formDetailsSubmitted;
   tabsSubmitted;
-  constructor(private formService: FormService,private router: Router) {}
+  constructor(public formService: FormService,private router: Router) {}
 
   ngOnInit() {
     this.formDetailsSubmitted = new FormGroup({});

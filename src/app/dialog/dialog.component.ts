@@ -8,7 +8,7 @@ import {DialogdataService} from '../services/dialogdata.service';
 })
 export class DialogComponent implements OnInit {
 
-  constructor(private dialogDataService:DialogdataService) { }
+  constructor(public dialogDataService:DialogdataService) { }
 
   ngOnInit() {
   }

@@ -1,0 +1,35 @@
+<form [formGroup]="newRatingGroup">
+
+  <div class="container">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Rated By" formControlName="ratedBy">
+    </mat-form-field>
+    <mat-form-field class="example-half-width">
+      <input matInput placeholder="Borrower ID" formControlName="borrowerId">
+    </mat-form-field>
+    <mat-form-field class="example-half-width">
+      <input matInput placeholder="Borrower Name" formControlName="borrowerName">
+    </mat-form-field>
+    <mat-checkbox formControlName="crossCollateralization"
+                  [checked]="crossCollateralization"
+                  (change)="!crossCollateralization">Cross Collateralization</mat-checkbox>
+  </div>
+
+  <div *ngIf="!crossCollateralization" formGroupName="crossCollaterlize" class="container">
+    <mat-form-field class="example-half-width">
+      <input matInput placeholder="Loan Id" formControlName="loanId">
+    </mat-form-field>
+    <mat-form-field class="example-half-width">
+      <input matInput placeholder="Loan Name" formControlName="loanName">
+    </mat-form-field>
+
+  </div>
+
+  <!--<div *ngIf="radioPressed">-->
+    <!--&lt;!&ndash;<mat-form-field>&ndash;&gt;-->
+    <!--<mat-checkbox formControlName="crossCollateralization" [checked]="crossCollateralization" (change)="crossCollateralization=true">Cross Collateralization</mat-checkbox>-->
+    <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
+  <!--</div>-->
+
+
+</form>
