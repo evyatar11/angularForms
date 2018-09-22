@@ -1,0 +1,12 @@
+.center-block {
+  display: block;
+  margin-right: auto;
+  text-align: center;
+  font-weight: bold;
+  margin-left: auto;
+  font-size: 18px
+}
+
+.margin {
+  margin-top: 8px;
+}

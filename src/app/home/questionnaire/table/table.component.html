@@ -1,0 +1,42 @@
+<div class="customBackground">
+  <hr>
+  <span class="center-block panel-title"> Your PD score is: {{  this.formService.pdScore }} </span>
+  <hr>
+</div>
+<table mat-table [dataSource]="this.formService.tableData" class="mat-elevation-z8">
+    <ng-container matColumnDef="Question" sticky>
+      <th mat-header-cell *matHeaderCellDef> Question </th>
+      <td mat-cell *matCellDef="let element"> {{element.questionText}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Selected Answer" sticky>
+      <th mat-header-cell *matHeaderCellDef> Selected Answer </th>
+      <td mat-cell *matCellDef="let element"> {{element.answerText}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Category Weight" sticky>
+      <th mat-header-cell *matHeaderCellDef> Category Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoryWeight}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Question Weight" sticky>
+      <th mat-header-cell *matHeaderCellDef> Question Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.questionWeight}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Selected Answer Score" sticky>
+      <th mat-header-cell *matHeaderCellDef> Selected Answer Score </th>
+      <td mat-cell *matCellDef="let element"> {{element.answerScore}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Effective Score" sticky>
+      <th mat-header-cell *matHeaderCellDef> Effective Score </th>
+      <td mat-cell *matCellDef="let element"> {{element.effectiveScore}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" sticky></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+<hr>
+<button mat-button matStepperNext class="btn btn-primary">Next</button>
+

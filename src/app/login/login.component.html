@@ -1,0 +1,30 @@
+<div class="container">
+  <hr>
+  <label class="center-block text-center">Sign in to the application</label>
+  <hr>
+</div>
+
+<mat-card class="example-card">
+  <form [formGroup]="signUpGroup" (ngSubmit)="onLogin()" class="example-form">
+  <mat-card-content>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Username" formControlName="username">
+        <mat-error *ngIf="!signUpGroup.get('username').valid &&
+      signUpGroup.get('username').touched">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Password" formControlName="password" type="password">
+        <mat-error
+          *ngIf="!signUpGroup.get('password').valid &&
+            signUpGroup.get('password').touched">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+    <br>
+    <button mat-button class="btn btn-primary" type="submit" [disabled]="!signUpGroup.valid">Sign In</button>
+    <hr>
+  </mat-card-content>
+  </form>
+</mat-card>
