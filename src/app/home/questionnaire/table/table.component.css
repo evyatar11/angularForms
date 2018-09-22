@@ -1,0 +1,51 @@
+.example-container {
+  height: 400px;
+  width: 550px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px;
+}
+
+th.mat-column-position, td.mat-column-position {
+  padding-left: 8px;
+}
+
+.mat-table-sticky{
+  border-right: 1px solid #e0e0e0;
+  padding-left: 8px;
+
+}
+
+.center-block {
+  display: block;
+  margin-right: auto;
+  text-align: center;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.customBackground{
+  background-color: blanchedalmond;
+}
+
+.mat-header-cell{
+  font-size:16px;
+  font-weight: 900;
+}
+
+.cell{
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+/*tr.mat-header-row ng-star-inserted{*/
+  /*font-size:20px;*/
+  /*font-weight: 900;*/
+/*}*/

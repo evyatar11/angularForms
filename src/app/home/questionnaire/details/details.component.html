@@ -1,0 +1,47 @@
+<div class="container">
+  <form [formGroup]="formDetailsGroup" (ngSubmit)="onDeailsFormSubmit()" class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Account Officer Identifier" formControlName="officerName">
+      <mat-error *ngIf="!formDetailsGroup.get('officerName').valid &&
+      formDetailsGroup.get('officerName').touched">
+        Officer name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="CIF#/Borrower Identifier" formControlName="borrowerId">
+      <mat-error
+        *ngIf="!formDetailsGroup.get('borrowerId').valid &&
+            formDetailsGroup.get('borrowerId').touched">
+        Borrower id is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Borrower Rating" formControlName="borrowerRating">
+        <mat-option>Please select borrower rating</mat-option>
+        <mat-option *ngFor="let rating of ratings" [value]="rating.value">
+          {{ rating.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="!formDetailsGroup.get('borrowerRating').value">
+        Borrower rating is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-select
+        placeholder="Questionnaire"
+        formControlName="formId">
+        <mat-option>Please select a form</mat-option>
+        <mat-option *ngFor="let form of forms" [value]="form.formId">
+          {{form.formName}}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="!formDetailsGroup.get('formId').value">
+        Please choose a form
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <button mat-button matStepperNext class="btn btn-primary" type="submit" [disabled]="!formDetailsGroup.valid">Next</button>
+  </form>
+</div>

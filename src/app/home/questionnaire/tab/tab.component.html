@@ -1,0 +1,26 @@
+<div class="container">
+  <form [formGroup]="tabsDetails" (ngSubmit)="onTabsFormSubmit()" class="example-form">
+    <mat-tab-group>
+      <mat-tab *ngFor="let category of formService.selectedForm.categoriesList"
+               [label]="category.categoryName">
+        <mat-form-field *ngFor="let question of category.questionList" [floatLabel]="question.questionContent" class="example-full-width">
+          <!--<mat-icon>radio_button_unchecked</mat-icon>-->
+          <mat-select [placeholder]="question.questionContent"
+                      [formControlName]="'q' + question.questionId"
+                      (selectionChange)="updateTableModule(category,question,$event.value)">
+            <mat-option>Choose an answer</mat-option>
+            <mat-option *ngFor="let answer of question.answerList" [value]="answer">
+              {{  answer.answerContent }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="!tabsDetails.get('q' + question.questionId).value">
+            Please choose an answer
+          </mat-error>
+        </mat-form-field>
+        <br><br>
+      </mat-tab>
+    </mat-tab-group>
+    <button mat-button matStepperNext class="btn btn-primary" type="submit" *ngIf="tabsDetails.valid">Next</button>
+  </form>
+</div>

@@ -1,0 +1,53 @@
+.example-form {
+  min-width: 150px;
+  max-width: 800px;
+  width: 100%;
+  margin:auto;
+  horiz-align: center;
+  vertical-align: center;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('../../assets/EY.jpg');
+  background-size: contain;
+}
+
+.mat-card-header{
+  background-color: #3f51b5;
+}
+
+.md-headline{
+  color: white;
+  width: 100%;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.mat-card-avatar{
+  border-radius: 0px;
+  width: 39px;
+}
+
+.mat-card-title{
+    color: white;
+}
+
+.center-block{
+  color: white;
+  font-size:18px;
+}
+
+
+
