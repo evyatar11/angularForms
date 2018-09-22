@@ -17,7 +17,7 @@ export class TableComponent implements OnInit {
     'Selected Answer Score',
     'Effective Score'];
 
-  constructor(private  formService:FormService) { }
+  constructor(public formService:FormService) { }
 
   ngOnInit() {
   }

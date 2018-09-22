@@ -12,6 +12,8 @@ export class LgdComponent implements OnInit {
   lgdDealScoreGroup:FormGroup;
   crossCollateralization=false;
   radioPressed=false;
+  newRating=false;
+  existingRating=false;
   constructor(private authService:AuthService) { }
 
   ngOnInit() {

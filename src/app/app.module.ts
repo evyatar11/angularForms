@@ -32,6 +32,8 @@ import {LogService} from './services/log.service';
 import {DialogService} from './services/dialog.service';
 import { DialogComponent } from './dialog/dialog.component';
 import {DialogdataService} from './services/dialogdata.service';
+import { ExistingRatingComponent } from './home/lgd/existing-rating/existing-rating.component';
+import { NewRatingComponent } from './home/lgd/new-rating/new-rating.component';
 
 const appRoutes: Routes  = [
   { path: '', component: HomeComponent },
@@ -55,7 +57,9 @@ const appRoutes: Routes  = [
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    DialogComponent
+    DialogComponent,
+    ExistingRatingComponent,
+    NewRatingComponent
   ],
   imports: [
     BrowserModule,

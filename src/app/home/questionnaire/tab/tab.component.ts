@@ -18,7 +18,7 @@ export class TabComponent implements OnInit {
   @Output() tabsSubmitted = new EventEmitter<FormGroup>();
   formToSubmit:FormSubmission;
 
-  constructor(private formService: FormService,private http: Http) {
+  constructor(public formService: FormService,private http: Http) {
   }
 
   ngOnInit() {
