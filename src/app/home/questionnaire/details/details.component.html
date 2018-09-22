@@ -31,14 +31,14 @@
       <mat-select
         placeholder="Questionnaire"
         formControlName="formId">
-        <mat-option>Please select a form</mat-option>
+        <mat-option>Please select a questionnaire</mat-option>
         <mat-option *ngFor="let form of forms" [value]="form.formId">
           {{form.formName}}
         </mat-option>
       </mat-select>
       <mat-error
         *ngIf="!formDetailsGroup.get('formId').value">
-        Please choose a form
+        Please choose a questionnaire
       </mat-error>
     </mat-form-field>
     <br><br>
