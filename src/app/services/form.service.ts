@@ -27,11 +27,12 @@ export class FormService {
   pdScore = 0;
   submittedFormId: number;
   isEditable = true;
+  serverSideAppName='uspb-1.0';
 
   constructor(private http:Http,private authService:AuthService,private router:Router){}
 
   getForms() {
-    return this.http.get('http://localhost:8080/forms/getForms',
+    return this.http.get('http://localhost:8080/'+ this.serverSideAppName +'/forms/getForms',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -51,7 +52,7 @@ export class FormService {
   }
 
   submitForm(formToSubmit: FormSubmission){
-    return this.http.post('http://localhost:8080/submittedForms/submitForm',formToSubmit,
+    return this.http.post('http://localhost:8080/'+ this.serverSideAppName +'/submittedForms/submitForm',formToSubmit,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -71,7 +72,8 @@ export class FormService {
   }
 
   deleteForm(){
-    return this.http.delete('http://localhost:8080/submittedForms/deleteSubmittedFormById/'+this.submittedFormId,
+    return this.http.delete('http://localhost:8080/'+
+      this.serverSideAppName + '/submittedForms/deleteSubmittedFormById/'+ this.submittedFormId,
       {headers:this.authService.getTokenHeaders()}
   ).pipe(
       catchError(
@@ -86,7 +88,7 @@ export class FormService {
   }
 
   getSubmittedForms() {
-    return this.http.get('http://localhost:8080/submittedForms/getSubmittedForms',
+    return this.http.get('http://localhost:8080/'+ this.serverSideAppName +'/submittedForms/getSubmittedForms',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
