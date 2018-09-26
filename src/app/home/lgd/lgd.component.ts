@@ -8,38 +8,24 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./lgd.component.css']
 })
 export class LgdComponent implements OnInit {
-  lgdDetailsGroup:FormGroup;
+  lgdNewRatingGroup:FormGroup;
   lgdDealScoreGroup:FormGroup;
-  crossCollateralization=false;
-  radioPressed=false;
   newRating=false;
   existingRating=false;
+  openDealScore=false;
   constructor(private authService:AuthService) { }
 
   ngOnInit() {
-    this.lgdDetailsGroup = new FormGroup({
-      'rating' : new FormGroup({
-        'startNew' : new FormControl(null,Validators.required),
-        'viewExisting' : new FormControl(null,Validators.required)
-      }),
-      'crossCollateralization': new FormControl(null),
-      'crossCollaterlize' : new FormGroup({
-        'loanId': new FormControl(null,Validators.required),
-        'loanName':new FormControl(null,Validators.required)
-      }),
-      'ratedBy': new FormControl({value : this.authService.getLoggedUser(), disabled: true}, Validators.required),
-      'borrowerId': new FormControl(null,Validators.required),
-      'borrowerName': new FormControl(null,Validators.required),
-
-
-
-    });
     this.lgdDealScoreGroup = new FormGroup({
       'EAD': new FormControl(null,Validators.required),
       'Base LGD': new FormControl({value : '45%',disabled:true},Validators.required),
       'cashAndSec': new FormControl(null,Validators.required),
     });
+  }
 
+  onNewRatingSubmitted(event){
+      this.lgdNewRatingGroup = event;
+      this.openDealScore = true;
   }
 
 }

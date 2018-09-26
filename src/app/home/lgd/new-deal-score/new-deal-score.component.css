@@ -41,11 +41,30 @@ mat-grid-tile {
   margin-right: 8px;
 }
 
-/*.example-full-width-center{*/
-/*width: 100%;*/
-/*margin-left: 8px;*/
-/*margin-right: 8px;*/
-/*text-align: center;*/
-/*margin-bottom: 8px;*/
-/*}*/
+.leftDiv{
+  width:48%;
+  text-align: center;
+  display: inline-block;
+  float: left;
+}
+
+.rightDiv{
+  width:48%;
+  text-align: center;
+  display: inline-block;
+  float: right;
+}
+
+.example-full-width-center{
+width: 100%;
+margin-left: 8px;
+margin-right: 8px;
+text-align: center;
+margin-bottom: 8px;
+}
+
+.buttonsDiv{
+  display: block;
+  clear: both;
+}
 
