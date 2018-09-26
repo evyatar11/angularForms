@@ -14,11 +14,6 @@ mat-grid-tile {
   font-size:18px;
 }
 
-.btn-primary{
-  width: 276px ;
-  height: 80px;
-}
-
 .list-group-item{
   border-radius: 18px;
   height: 50px;
@@ -35,7 +30,7 @@ mat-grid-tile {
 }
 
 .example-full-width {
-  width: 78%;
+  width: 71%;
   margin-left: 8px;
   margin-right: 8px;
 }

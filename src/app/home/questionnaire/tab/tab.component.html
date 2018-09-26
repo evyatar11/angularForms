@@ -4,7 +4,6 @@
       <mat-tab *ngFor="let category of formService.selectedForm.categoriesList"
                [label]="category.categoryName">
         <mat-form-field *ngFor="let question of category.questionList" [floatLabel]="question.questionContent" class="example-full-width">
-          <!--<mat-icon>radio_button_unchecked</mat-icon>-->
           <mat-select [placeholder]="question.questionContent"
                       [formControlName]="'q' + question.questionId"
                       (selectionChange)="updateTableModule(category,question,$event.value)">

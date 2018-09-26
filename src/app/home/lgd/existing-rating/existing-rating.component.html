@@ -1,3 +1,32 @@
-<p>
-  existing-rating works!
-</p>
+<form [formGroup]="existingRatingGroup" (ngSubmit)="onExistingFormSubmit()">
+<div class="container">
+  <mat-form-field class="example-half-width">
+    <mat-select placeholder="Borrower ID" formControlName="borrowerId"
+                (selectionChange)="onUpdateBorrowerId($event.value)">
+      <mat-option>Please select borrowerId</mat-option>
+      <mat-option *ngFor="let borrower of borrowers" [value]="borrower">
+        {{ borrower.borrowerId }}
+      </mat-option>
+    </mat-select>
+    <mat-error
+      *ngIf="!existingRatingGroup.get('borrowerId').value">
+      Borrower Id is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-half-width">
+    <input matInput placeholder="Borrower Name" formControlName="borrowerName" [value]="selectedBorrowerName">
+  </mat-form-field>
+
+  <mat-form-field class="example-half-width">
+    <input matInput placeholder="Loan Id" formControlName="loanId" type="number" [value]="loans">
+    <mat-error *ngIf="!existingRatingGroup.get('loanId').valid &&
+      existingRatingGroup.get('loanId').touched">
+      Loan id is required
+    </mat-error>
+  </mat-form-field>
+
+  <br><br>
+  <button mat-button matStepperNext class="btn btn-primary" type="submit" [disabled]="!existingRatingGroup.valid">Next</button>
+</div>
+</form>

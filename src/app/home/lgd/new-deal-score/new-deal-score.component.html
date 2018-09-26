@@ -1,0 +1,91 @@
+<form [formGroup]="dealScoreGroup" (ngSubmit)="onDealFormSubmit()" >
+  <mat-form-field class="example-full-width-center">
+    <input matInput placeholder="Base LGD" formControlName="baseLgd" [value]="lgdService.dealScoreSubmittionDetials.baseLgd">
+  </mat-form-field>
+
+  <div class="leftDiv">
+
+    <mat-form-field class="example-full-width-center" formGroupName="eadGroup">
+      <input matInput placeholder="EAD" formControlName="EAD" type="number" (input)="onCasdOrSecChange()">
+    </mat-form-field>
+    <mat-error *ngIf="!dealScoreGroup.get('eadGroup.EAD').valid &&
+      dealScoreGroup.get('eadGroup.EAD').touched">
+      EAD is required
+    </mat-error>
+
+    <mat-form-field class="example-full-width-center" formGroupName="eadGroup">
+      <input matInput placeholder="Cash and securities" formControlName="CashAndSec" type="number" (input)="onCasdOrSecChange()">
+    </mat-form-field>
+    <mat-error *ngIf="!dealScoreGroup.get('eadGroup.CashAndSec').valid &&
+      dealScoreGroup.get('eadGroup.CashAndSec').touched">
+      Cash and securities is required
+    </mat-error>
+
+    <mat-form-field class="example-full-width-center">
+      <input matInput placeholder="Modified Lgd" formControlName="modifiedLgd" type="number" [value]="modifiedLgd">
+    </mat-form-field>
+
+
+
+    <mat-form-field *ngFor="let question of lgdService.dealScoreQuestions" [floatLabel]="question.questionContent" class="example-full-width" formGroupName="questionsGroup">
+      <mat-select [placeholder]="question.questionContent"
+                  [formControlName]="'q' + question.id"
+                  (selectionChange)="updateAdjustedLgd($event.value,question)">
+        <mat-option>Choose an answer</mat-option>
+        <mat-option *ngFor="let answer of question.answerList" [value]="answer">
+          {{  answer.answerContent }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="!dealScoreGroup.get('questionsGroup.q' + question.id).value">
+        Please choose an answer
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-center">
+      <input matInput placeholder="Adjusted Lgd" formControlName="adjustedLgd" type="number" [value]="adjustedLgd">
+    </mat-form-field>
+    <div class="example-full-width">
+      <mat-checkbox
+        formControlName="lgdOverride"
+        [checked]="lgdOverride"
+        (change)="onLgdOverride()">Override LGD</mat-checkbox>
+    </div>
+    <div *ngIf="lgdOverride" formGroupName="overrideLgdGroup">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Lgd Override" formControlName="overrideLgd" type="number"  [value]="overrideLgd"
+               (input)="onOverrideLgdChange()">
+        <mat-error *ngIf="!dealScoreGroup.get('overrideLgdGroup.overrideLgd').valid &&
+      dealScoreGroup.get('overrideLgdGroup.overrideLgd').touched">
+          Override value is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Override Reason" formControlName="overrideReason">
+        <mat-error *ngIf="!dealScoreGroup.get('overrideLgdGroup.overrideReason').valid &&
+      dealScoreGroup.get('overrideLgdGroup.overrideReason').touched">
+          Override reason is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width-center">
+      <input matInput placeholder="Final Lgd" formControlName="finalLgd" type="number" [value]="finalLgd">
+    </mat-form-field>
+
+    <div class="example-full-width">
+      <mat-checkbox
+        formControlName="lockForComittee"
+        [checked]="lockForComittee"
+        (change)="updateLockCommittee()">Lock for committee</mat-checkbox>
+    </div>
+
+  </div>
+  <div class="rightDiv">
+    right!!
+  </div>
+  <br><br>
+  <div class="buttonsDiv">
+    <button mat-button matStepperNext class="btn btn-primary" type="submit" [disabled]="!dealScoreGroup.valid">Save</button>
+  </div>
+</form>

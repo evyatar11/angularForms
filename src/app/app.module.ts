@@ -34,6 +34,9 @@ import { DialogComponent } from './dialog/dialog.component';
 import {DialogdataService} from './services/dialogdata.service';
 import { ExistingRatingComponent } from './home/lgd/existing-rating/existing-rating.component';
 import { NewRatingComponent } from './home/lgd/new-rating/new-rating.component';
+import {NewDealScoreComponent} from './home/lgd/new-deal-score/new-deal-score.component';
+import { ExistingDealScoreComponent } from './home/lgd/existing-deal-score/existing-deal-score.component';
+import {LgdService} from './services/lgd.service';
 
 const appRoutes: Routes  = [
   { path: '', component: HomeComponent },
@@ -59,7 +62,9 @@ const appRoutes: Routes  = [
     SignupComponent,
     DialogComponent,
     ExistingRatingComponent,
-    NewRatingComponent
+    NewRatingComponent,
+    NewDealScoreComponent,
+    ExistingDealScoreComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +88,7 @@ const appRoutes: Routes  = [
     HttpModule
 
   ],
-  providers: [FormService,AuthService,LogService,DialogService,DialogdataService],
+  providers: [FormService,AuthService,LogService,DialogService,DialogdataService,LgdService],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent]
 })

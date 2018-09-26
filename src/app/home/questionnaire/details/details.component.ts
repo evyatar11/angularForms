@@ -20,7 +20,7 @@ export class DetailsComponent implements OnInit {
     {value: 7}, {value: 8}, {value: 9}, {value: 10}
   ];
 
-  constructor(private formService: FormService) {}
+  constructor(public formService: FormService) {}
 
   ngOnInit() {
     this.formService.getForms().subscribe(

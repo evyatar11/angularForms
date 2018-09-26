@@ -1,35 +1,86 @@
-<form [formGroup]="newRatingGroup">
-
+<form [formGroup]="newRatingGroup" (ngSubmit)="onDeailsFormSubmit()" >
   <div class="container">
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Rated By" formControlName="ratedBy">
     </mat-form-field>
     <mat-form-field class="example-half-width">
-      <input matInput placeholder="Borrower ID" formControlName="borrowerId">
+      <input matInput placeholder="Date" formControlName="date">
+    </mat-form-field>
+    <mat-form-field class="example-half-width">
+      <mat-select placeholder="Currency" formControlName="currency">
+        <mat-option>Please select currency</mat-option>
+        <mat-option *ngFor="let currency of currencies" [value]="currency">
+          {{ currency }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="!newRatingGroup.get('bussinessUnit').value">
+        Currency is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-half-width">
+      <input matInput placeholder="Borrower ID" formControlName="borrowerId" type="number">
+      <mat-error *ngIf="!newRatingGroup.get('borrowerId').valid &&
+      newRatingGroup.get('borrowerId').touched">
+        Borrower id is required
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-half-width">
       <input matInput placeholder="Borrower Name" formControlName="borrowerName">
+      <mat-error *ngIf="!newRatingGroup.get('borrowerName').valid &&
+      newRatingGroup.get('borrowerName').touched">
+        Borrower name is required
+      </mat-error>
     </mat-form-field>
-    <mat-checkbox formControlName="crossCollateralization"
+    <mat-form-field class="example-half-width">
+      <input matInput placeholder="Lending officer leading the relationship" formControlName="lendingOfficer">
+      <mat-error *ngIf="!newRatingGroup.get('lendingOfficer').valid &&
+      newRatingGroup.get('lendingOfficer').touched">
+        Lending Officer is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-half-width">
+      <input matInput placeholder="Credit committee id" formControlName="creditCommittee" type="number">
+      <mat-error *ngIf="!newRatingGroup.get('creditCommittee').valid &&
+      newRatingGroup.get('creditCommittee').touched">
+        Credit Committee is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-half-width">
+      <mat-select placeholder="Bussiness Unit" formControlName="bussinessUnit"
+                  (selectionChange)="updateBaseAndMinLgd($event.value)">
+        <mat-option>Please select bussiness unit</mat-option>
+        <mat-option *ngFor="let unit of lgdService.units" [value]="unit">
+          {{ unit.businessLine }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="!newRatingGroup.get('bussinessUnit').value">
+        Bussiness Unit is required
+      </mat-error>
+    </mat-form-field>
+    <mat-checkbox class="example-half-width"
+                  formControlName="crossCollateralization"
                   [checked]="crossCollateralization"
-                  (change)="!crossCollateralization">Cross Collateralization</mat-checkbox>
+                  (change)="onCrossCollateral()">Cross Collateralization</mat-checkbox>
   </div>
 
   <div *ngIf="!crossCollateralization" formGroupName="crossCollaterlize" class="container">
     <mat-form-field class="example-half-width">
-      <input matInput placeholder="Loan Id" formControlName="loanId">
+      <input matInput placeholder="Loan Id" formControlName="loanId" type="number">
+      <mat-error *ngIf="!newRatingGroup.get('crossCollaterlize.loanId').valid &&
+      newRatingGroup.get('crossCollaterlize.loanId').touched">
+        Loan id is required
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-half-width">
       <input matInput placeholder="Loan Name" formControlName="loanName">
+      <mat-error *ngIf="!newRatingGroup.get('crossCollaterlize.loanName').valid &&
+      newRatingGroup.get('crossCollaterlize.loanName').touched">
+        Loan Name id is required
+      </mat-error>
     </mat-form-field>
-
   </div>
-
-  <!--<div *ngIf="radioPressed">-->
-    <!--&lt;!&ndash;<mat-form-field>&ndash;&gt;-->
-    <!--<mat-checkbox formControlName="crossCollateralization" [checked]="crossCollateralization" (change)="crossCollateralization=true">Cross Collateralization</mat-checkbox>-->
-    <!--&lt;!&ndash;</mat-form-field>&ndash;&gt;-->
-  <!--</div>-->
-
-
+  <br><br>
+  <button mat-button matStepperNext class="btn btn-primary" type="submit" [disabled]="!newRatingGroup.valid">Next</button>
 </form>
