@@ -10,6 +10,8 @@ import {Router} from '@angular/router';
 @Injectable()
 export class FormService {
   currentTab = 'Home';
+  path = window.location.pathname === '' ? '/': window.location.pathname;
+  url = window.location.origin + this.path;
   selectedForm: Form;
   formProgress;
   formSubmission:FormSubmission = new FormSubmission();
@@ -27,12 +29,12 @@ export class FormService {
   pdScore = 0;
   submittedFormId: number;
   isEditable = true;
-  serverSideAppName='uspb-1.0';
 
-  constructor(private http:Http,private authService:AuthService,private router:Router){}
+  constructor(private http:Http,private authService:AuthService,
+              private router:Router){}
 
   getForms() {
-    return this.http.get('http://localhost:8080/'+ this.serverSideAppName +'/forms/getForms',
+    return this.http.get(this.url + 'forms/getForms',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -52,7 +54,7 @@ export class FormService {
   }
 
   submitForm(formToSubmit: FormSubmission){
-    return this.http.post('http://localhost:8080/'+ this.serverSideAppName +'/submittedForms/submitForm',formToSubmit,
+    return this.http.post(this.url +'submittedForms/submitForm',formToSubmit,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -72,8 +74,7 @@ export class FormService {
   }
 
   deleteForm(){
-    return this.http.delete('http://localhost:8080/'+
-      this.serverSideAppName + '/submittedForms/deleteSubmittedFormById/'+ this.submittedFormId,
+    return this.http.delete(this.url + 'submittedForms/deleteSubmittedFormById/'+ this.submittedFormId,
       {headers:this.authService.getTokenHeaders()}
   ).pipe(
       catchError(
@@ -88,7 +89,7 @@ export class FormService {
   }
 
   getSubmittedForms() {
-    return this.http.get('http://localhost:8080/'+ this.serverSideAppName +'/submittedForms/getSubmittedForms',
+    return this.http.get(this.url +'submittedForms/getSubmittedForms',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(

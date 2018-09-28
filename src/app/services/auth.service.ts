@@ -9,12 +9,14 @@ import {CookieService} from 'ngx-cookie';
 
 @Injectable()
 export class AuthService {
-  serverSideAppName='uspb-1.0';
+  path = window.location.pathname === '' ? '/': window.location.pathname;
+  url = window.location.origin + this.path;
+
   constructor(private http: Http,private cookieService: CookieService ) {}
 
   authenticateUser(auth: Auth) {
     // const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.post('http://localhost:8080/'+ this.serverSideAppName + '/auth/authenticateUser', auth)
+    return this.http.post(this.url+ 'auth/authenticateUser', auth)
       .pipe(
         map(
           (response: Response) => {
@@ -31,7 +33,7 @@ export class AuthService {
 
   generateTokenForUser(username){
     // const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.get('http://localhost:8080/'+ this.serverSideAppName + '/auth/generateTokenForUser/' +username)
+    return this.http.get(this.url + 'auth/generateTokenForUser/' +username)
       .pipe(
         map(
           (response: Response) => {
@@ -51,7 +53,7 @@ export class AuthService {
   }
 
   checkTokenValidity(cookie: TokenResponse) {
-    return this.http.post('http://localhost:8080/'+ this.serverSideAppName + '/auth/validateTokenForUser', cookie)
+    return this.http.post(this.url + 'auth/validateTokenForUser', cookie)
       .pipe(
         map(
           (response: Response) => {

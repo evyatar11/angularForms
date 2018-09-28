@@ -10,15 +10,17 @@ import {DealScore} from '../models/DealScore';
 
 @Injectable()
 export class LgdService {
-  serverSideAppName='uspb-1.0';
   minLgd:number;
   units:BussinessUnit [];
   dealScoreQuestions: LgdQuestion[];
   dealScoreSubmittionDetials:DealScore = new DealScore();
+  path = window.location.pathname === '' ? '/': window.location.pathname;
+  url = window.location.origin + this.path;
+
   constructor(private http:Http,private authService:AuthService,private router:Router){}
 
   getBussinessUnits() {
-      return this.http.get('http://localhost:8080/'+ this.serverSideAppName + '/lgd/getBussinessUnits',
+      return this.http.get(this.url+ 'lgd/getBussinessUnits',
         {headers:this.authService.getTokenHeaders()})
         .pipe(
           map(
@@ -38,7 +40,7 @@ export class LgdService {
     }
 
   getDealScoreQuestions() {
-    return this.http.get('http://localhost:8080/' + this.serverSideAppName + '/lgd/getLgdQuestions',
+    return this.http.get(this.url+ 'lgd/getLgdQuestions',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -58,7 +60,7 @@ export class LgdService {
   }
 
   submitLgd(){
-    return this.http.post('http://localhost:8080/' + this.serverSideAppName + '/lgd/submit',this.dealScoreSubmittionDetials,
+    return this.http.post(this.url + 'lgd/submit',this.dealScoreSubmittionDetials,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -78,7 +80,7 @@ export class LgdService {
   }
 
   getSubmittedBorrowers() {
-    return this.http.get('http://localhost:8080/'+ this.serverSideAppName + '/lgd/getSubmittedBorrowers',
+    return this.http.get(this.url + 'lgd/getSubmittedBorrowers',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -98,7 +100,7 @@ export class LgdService {
   }
 
   getBorrowerLoans(borrowerId){
-    return this.http.get('http://localhost:8080/'+ this.serverSideAppName +'/lgd/getBorrowerLoans/' + borrowerId,
+    return this.http.get(this.url +'lgd/getBorrowerLoans/' + borrowerId,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -118,7 +120,7 @@ export class LgdService {
   }
 
   getExistingDealDetails(borrowerId: number, loanId: number) {
-    return this.http.get('http://localhost:8080/'+ this.serverSideAppName +'/lgd/getExistingDealDetails/' + borrowerId + '/' +loanId,
+    return this.http.get(this.url  +'lgd/getExistingDealDetails/' + borrowerId + '/' +loanId,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(

@@ -44,7 +44,7 @@ const appRoutes: Routes  = [
   { path: 'signup', component: SignupComponent },
   { path: 'questionnaire', component: QuestionnaireComponent },
   { path: 'lgd', component: LgdComponent },
-  { path: '**', component: HomeComponent },
+  { path: '**', component: HomeComponent }
 ];
 
 
@@ -68,7 +68,7 @@ const appRoutes: Routes  = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { useHash: true }),
     ReactiveFormsModule,
     MatGridListModule,
     MatToolbarModule,
@@ -88,7 +88,8 @@ const appRoutes: Routes  = [
     HttpModule
 
   ],
-  providers: [FormService,AuthService,LogService,DialogService,DialogdataService,LgdService],
+  providers: [FormService,AuthService,LogService,DialogService,
+    DialogdataService,LgdService],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent]
 })
