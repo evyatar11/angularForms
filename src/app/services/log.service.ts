@@ -5,14 +5,15 @@ import {Observable, pipe} from 'rxjs';
 
 @Injectable()
 export class LogService {
-  serverSideAppName='uspb-1.0';
+  path = window.location.pathname === '' ? '/': window.location.pathname;
+  url = window.location.origin + this.path;
   constructor(private http: Http) { }
 
   logSuccessfullyLogin(username: string) {
-    this.http.get('http://localhost:8080/'+ this.serverSideAppName +'/log/logSuccessfulLogin/' + username).subscribe();
+    this.http.get(this.url+'log/logSuccessfulLogin/' + username).subscribe();
   }
 
   logFailedLogin(username: string) {
-    this.http.get('http://localhost:8080/'+ this.serverSideAppName +'/log/logFailedLogin/' +username).subscribe();
+    this.http.get(this.url+'log/logFailedLogin/' +username).subscribe();
   }
 }
