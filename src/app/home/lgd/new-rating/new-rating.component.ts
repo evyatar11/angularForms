@@ -104,7 +104,7 @@ export class NewRatingComponent implements OnInit {
     this.lgdService.dealScoreSubmittionDetials.date = new Date();
     this.lgdService.dealScoreSubmittionDetials.currency = this.newRatingGroup.get('currency').value;
 
-    if (this.crossCollateralization){
+    if (!this.crossCollateralization){
       this.lgdService.dealScoreSubmittionDetials.loanId = this.newRatingGroup.get('crossCollaterlize.loanId').value;
       this.lgdService.dealScoreSubmittionDetials.loanName = this.newRatingGroup.get('crossCollaterlize.loanName').value;
     }
