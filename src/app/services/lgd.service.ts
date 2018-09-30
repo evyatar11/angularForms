@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {BussinessUnit} from '../models/BussinessUnit';
 import {LgdQuestion} from '../models/LgdQuestion';
 import {DealScore} from '../models/DealScore';
+import {Borrower} from '../models/Borrower';
 
 @Injectable()
 export class LgdService {
@@ -15,7 +16,8 @@ export class LgdService {
   dealScoreQuestions: LgdQuestion[];
   dealScoreSubmittionDetials:DealScore = new DealScore();
   path = window.location.pathname === '' ? '/': window.location.pathname;
-  url = window.location.origin + this.path;
+  // url = window.location.origin + this.path;
+  url = 'http://localhost:8080/uspb/';
 
   constructor(private http:Http,private authService:AuthService,private router:Router){}
 
@@ -99,8 +101,8 @@ export class LgdService {
       );
   }
 
-  getBorrowerLoans(borrowerId){
-    return this.http.get(this.url +'lgd/getBorrowerLoans/' + borrowerId,
+  getExistingDealDetails(borrower:Borrower) {
+    return this.http.get(this.url  +'lgd/getLastSubmittedFromByBorrower/' + borrower.borrowerId + '/' +borrower.borrowerName,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -119,8 +121,9 @@ export class LgdService {
       );
   }
 
-  getExistingDealDetails(borrowerId: number, loanId: number) {
-    return this.http.get(this.url  +'lgd/getExistingDealDetails/' + borrowerId + '/' +loanId,
+  getExistingDealDetailsWithLoan(borrower:Borrower,loanId:number) {
+    return this.http.get(this.url  +'lgd/getLastSubmittedFromByBorrowerAndLoan/' +
+      borrower.borrowerId + '/' + borrower.borrowerName + '/' + loanId,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(

@@ -49,8 +49,8 @@ export class NewDealScoreComponent implements OnInit {
 
 
     this.dealScoreGroup.addControl('eadGroup',new FormGroup({
-      'EAD' : new FormControl({value : 0}, Validators.required),
-      'CashAndSec' : new FormControl({value : 0}, Validators.required)
+      'EAD' : new FormControl(null, Validators.required),
+      'CashAndSec' : new FormControl(null, Validators.required)
     }));
 
     this.dealScoreGroup.addControl('overrideLgdGroup',new FormGroup({

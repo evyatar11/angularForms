@@ -4,22 +4,35 @@
   <label class="center-block text-center">LGD</label>
   <hr>
   <mat-vertical-stepper linear #stepper>
+
     <mat-step>
       <ng-template matStepLabel>Initial Details</ng-template>
       <mat-radio-group class="example-full-width-center">
-        <mat-radio-button value="1" class="example-half-width" (change)="newRating=true;existingRating=false;">Start a new rating process </mat-radio-button>
-        <mat-radio-button value="2" class="example-half-width" (change)="existingRating=true;newRating=false;">View an existing rating</mat-radio-button>
+        <mat-radio-button value="1" class="example-half-width" (change)="newRating=true;existingRating=false;openExistingDealScore=false;">Start a new rating process </mat-radio-button>
+        <mat-radio-button value="2" class="example-half-width" (change)="existingRating=true;newRating=false;openNewDealScore=false;">View an existing rating</mat-radio-button>
       </mat-radio-group>
       <app-new-rating (newRatingGroupSubmitted)="onNewRatingSubmitted($event)" *ngIf="newRating"></app-new-rating>
-      <app-existing-rating *ngIf="existingRating"></app-existing-rating>
+      <app-existing-rating (existingDealScoreGroupSubmitted)="onExistingDealScoreSubmitted($event)" *ngIf="existingRating"></app-existing-rating>
     </mat-step>
+
   </mat-vertical-stepper>
 
-  <mat-vertical-stepper linear #stepper>
+  <mat-vertical-stepper linear #stepper *ngIf="openNewDealScore">
+
     <mat-step>
-      <ng-template matStepLabel>Deal Score</ng-template>
-      <app-new-deal-score *ngIf="openDealScore"></app-new-deal-score>
-      <!--<app-new-deal-score></app-new-deal-score>-->
+      <ng-template matStepLabel>New Deal Score</ng-template>
+      <app-new-deal-score *ngIf="openNewDealScore"></app-new-deal-score>
     </mat-step>
+    s
   </mat-vertical-stepper>
+
+  <mat-vertical-stepper linear #stepper *ngIf="openExistingDealScore">
+
+    <mat-step>
+      <ng-template matStepLabel>Existing Deal Score</ng-template>
+      <app-existing-deal-score *ngIf="openExistingDealScore"></app-existing-deal-score>
+    </mat-step>
+
+  </mat-vertical-stepper>
+
 </div>

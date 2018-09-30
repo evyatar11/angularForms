@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
+import {DealScore} from '../../models/DealScore';
 
 @Component({
   selector: 'app-lgd',
@@ -12,7 +13,10 @@ export class LgdComponent implements OnInit {
   lgdDealScoreGroup:FormGroup;
   newRating=false;
   existingRating=false;
-  openDealScore=false;
+  openNewDealScore=false;
+  openExistingDealScore=false;
+  lgdExistingDealData:DealScore;
+
   constructor(private authService:AuthService) { }
 
   ngOnInit() {
@@ -25,7 +29,12 @@ export class LgdComponent implements OnInit {
 
   onNewRatingSubmitted(event){
       this.lgdNewRatingGroup = event;
-      this.openDealScore = true;
+      this.openNewDealScore = true;
+  }
+
+  onExistingDealScoreSubmitted(event){
+    this.lgdExistingDealData = event;
+    this.openExistingDealScore = true;
   }
 
 }
