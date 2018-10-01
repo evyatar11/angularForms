@@ -7,7 +7,7 @@
           <mat-select [placeholder]="question.questionContent"
                       [formControlName]="'q' + question.questionId"
                       (selectionChange)="updateTableModule(category,question,$event.value)">
-            <mat-option>Choose an answer</mat-option>
+            <mat-option style="font-size: 14px; font-weight: bold; font-style: italic;">{{ question.questionContent }}</mat-option>
             <mat-option *ngFor="let answer of question.answerList" [value]="answer">
               {{  answer.answerContent }}
             </mat-option>
