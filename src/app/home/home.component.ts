@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatIconRegistry} from '@angular/material';
+import {LgdService} from '../services/lgd.service';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +9,14 @@ import {MatIconRegistry} from '@angular/material';
 })
 export class HomeComponent implements OnInit {
   navigatedOut=false;
-  constructor(private router:Router){}
+  constructor(private router:Router,private lgdService:LgdService){}
 
   onTileClicked(path){
     this.router.navigate(['/'+path]);
     this.navigatedOut=true;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

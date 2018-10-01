@@ -43,16 +43,16 @@ mat-grid-tile {
 
 .leftDiv{
   width:48%;
-  text-align: center;
+  /*text-align: center;*/
   display: inline-block;
   float: left;
 }
 
 .rightDiv{
   width:48%;
-  text-align: center;
+  /*text-align: center;*/
   display: inline-block;
-  float: right;
+  /*float: right;*/
 }
 
 .example-full-width-center{

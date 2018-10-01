@@ -4,6 +4,8 @@ import {AuthService} from '../../../services/auth.service';
 import {LgdService} from '../../../services/lgd.service';
 import {BussinessUnit} from '../../../models/BussinessUnit';
 import {LgdQuestion} from '../../../models/LgdQuestion';
+import {DealScore} from '../../../models/DealScore';
+import {Borrower} from '../../../models/Borrower';
 
 @Component({
   selector: 'app-new-rating',
@@ -81,8 +83,48 @@ export class NewRatingComponent implements OnInit {
   onDeailsFormSubmit(){
     console.log(this.newRatingGroup);
     this.setNewRatingFieldsForSubmission();
-    // Emit submition event
-    this.newRatingGroupSubmitted.emit(this.newRatingGroup);
+    // Get Borrower data
+    const borrower:Borrower = new Borrower();
+    borrower.borrowerId = this.lgdService.dealScoreSubmittionDetials.borrowerId;
+    borrower.borrowerName = this.lgdService.dealScoreSubmittionDetials.borrowerName;
+    // Hide done button on existing deal score
+    this.lgdService.showExistingDoneButton = false;
+    // Retrieve last submitted borower deal score
+    if (this.crossCollateralization){
+      this.lgdService.getExistingDealDetails(borrower).subscribe(
+        (value:DealScore) => {
+          // @ts-ignore
+          value.qaArr = JSON.parse(value.qa);
+          //  Set existing score data
+          this.lgdService.existingDealData = value;
+          // Emit submition event
+          this.newRatingGroupSubmitted.emit(this.newRatingGroup);
+        }
+        ,(error) => {
+          if (error.name === 'TypeError'){
+            this.lgdService.existingDealData = new DealScore();
+            this.newRatingGroupSubmitted.emit(this.newRatingGroup);
+          }
+        }
+        );
+    }
+    else{
+      this.lgdService.getExistingDealDetailsWithLoan(borrower,this.lgdService.dealScoreSubmittionDetials.loanId).subscribe(
+        (value:DealScore) => {
+          // @ts-ignore
+          value.qaArr = JSON.parse(value.qa);
+          //  Set existing score data
+          this.lgdService.existingDealData = value;
+          // Emit submition event
+          this.newRatingGroupSubmitted.emit(this.newRatingGroup);
+        }
+        ,(error) => {
+          if (error.name === 'TypeError'){
+            this.lgdService.existingDealData = new DealScore();
+            this.newRatingGroupSubmitted.emit(this.newRatingGroup);
+          }        }
+        );
+    }
   }
 
   updateBaseAndMinLgd(event:BussinessUnit){
@@ -103,7 +145,6 @@ export class NewRatingComponent implements OnInit {
     this.lgdService.dealScoreSubmittionDetials.baseLgd = this.newRatingGroup.get('bussinessUnit').value.baseLGD;
     this.lgdService.dealScoreSubmittionDetials.date = new Date();
     this.lgdService.dealScoreSubmittionDetials.currency = this.newRatingGroup.get('currency').value;
-
     if (!this.crossCollateralization){
       this.lgdService.dealScoreSubmittionDetials.loanId = this.newRatingGroup.get('crossCollaterlize.loanId').value;
       this.lgdService.dealScoreSubmittionDetials.loanName = this.newRatingGroup.get('crossCollaterlize.loanName').value;

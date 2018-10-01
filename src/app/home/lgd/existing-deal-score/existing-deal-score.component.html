@@ -1,1 +1,57 @@
 
+<div class="container">
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Base lgd" [value]="lgdService.existingDealData.baseLgd" [disabled]="true">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="EAD" [value]="lgdService.existingDealData.ead" [disabled]="true">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Cash and securities" [value]="lgdService.existingDealData.cashAndSecurities" [disabled]="true">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Modified Lgd" [value]="lgdService.existingDealData.modifiedLgd" [disabled]="true">
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let qa of lgdService.existingDealData.qaArr" [floatLabel]="qa.questionText" class="example-full-width">
+    <input matInput [placeholder]="qa.questionText" [value]="qa.answerText" [disabled]="true">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Adjusted Lgd" [value]="lgdService.existingDealData.adjustedLgd" [disabled]="true">
+  </mat-form-field>
+
+  <div class="example-full-width">
+    <mat-checkbox [checked]="lgdService.existingDealData.overrideReason" [disabled]="true">Override LGD</mat-checkbox>
+  </div>
+
+  <div *ngIf="lgdService.existingDealData.overrideReason">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Lgd Override" [value]="lgdService.existingDealData.overrideLgd" [disabled]="true">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Override Reason" [value]="lgdService.existingDealData.overrideReason" [disabled]="true">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Final Lgd" [value]="lgdService.existingDealData.finalLgd" [disabled]="true">
+  </mat-form-field>
+
+  <div class="example-full-width">
+    <mat-checkbox
+      [checked]="lockForCommitee()" [disabled]="true">Lock for committee</mat-checkbox>
+  </div>
+
+  <br><br>
+  <div class="buttonsDiv" *ngIf="lgdService.showExistingDoneButton">
+    <button mat-button class="btn btn-primary" (click)="routeToHomePage()">Done</button>
+  </div>
+
+</div>
+
+

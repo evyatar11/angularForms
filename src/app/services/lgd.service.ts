@@ -18,6 +18,9 @@ export class LgdService {
   path = window.location.pathname === '' ? '/': window.location.pathname;
   // url = window.location.origin + this.path;
   url = 'http://localhost:8080/uspb/';
+  existingDealData:DealScore = new DealScore();
+  showExistingDoneButton = true;
+
 
   constructor(private http:Http,private authService:AuthService,private router:Router){}
 
@@ -128,8 +131,7 @@ export class LgdService {
       .pipe(
         map(
           (response: Response) => {
-            return response.json();
-          }
+            return response.json();          }
         )
         ,catchError(
           (error:Response) => {

@@ -23,6 +23,8 @@ export class ExistingRatingComponent implements OnInit {
   constructor(public http:Http,public lgdService:LgdService) { }
 
   ngOnInit() {
+    this.dealScore = new DealScore();
+    this.dealScore.qaArr = [];
     this.lgdService.getSubmittedBorrowers().subscribe(
       (value:Borrower[]) => {
         this.borrowers = value;
@@ -57,6 +59,8 @@ export class ExistingRatingComponent implements OnInit {
 
   onExistingFormSubmit(){
     const borrower = this.existingRatingGroup.get('borrowerId').value;
+    // Show done button
+    this.lgdService.showExistingDoneButton = false;
     if (this.showLoans){
       if (this.isDefaultBorrowerDeal){
         this.getExistingDealScore(borrower);
@@ -68,14 +72,16 @@ export class ExistingRatingComponent implements OnInit {
     else{
       this.getExistingDealScore(borrower);
     }
-    // If suceed then emit event
-    this.existingDealScoreGroupSubmitted.emit(this.dealScore);
   }
 
   private getExistingDealScore(borrower:Borrower){
     this.lgdService.getExistingDealDetails(borrower).subscribe(
       (value:DealScore) => {
         this.dealScore = value;
+        // @ts-ignore
+        this.dealScore.qaArr = JSON.parse(value.qa);
+        // If suceed then emit event
+        this.existingDealScoreGroupSubmitted.emit(this.dealScore);
       });
   }
 
@@ -83,6 +89,10 @@ export class ExistingRatingComponent implements OnInit {
     this.lgdService.getExistingDealDetailsWithLoan(borrower,this.selectedLoanId).subscribe(
       (value:DealScore) => {
         this.dealScore = value;
+        // @ts-ignore
+        this.dealScore.qaArr = JSON.parse(value.qa);
+        // If suceed then emit event
+        this.existingDealScoreGroupSubmitted.emit(this.dealScore);
       });
   }
 

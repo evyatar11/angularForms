@@ -10,6 +10,7 @@ export class DealScore{
   businessUnit:string;
   currency:string;
   qa:string;
+  qaArr:{questionText:string,answerText:string} [];
   date:Date;
   ead:number;
   cashAndSecurities:number;
