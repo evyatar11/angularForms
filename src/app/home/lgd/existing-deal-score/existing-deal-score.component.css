@@ -1,0 +1,70 @@
+mat-grid-tile {
+  background: whitesmoke;
+}
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.center-block{
+  color: white;
+  font-size:18px;
+}
+
+.list-group-item{
+  border-radius: 18px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 800px;
+  width: 100%;
+  margin:auto;
+}
+
+.example-full-width {
+  width: 71%;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.example-half-width {
+  width: 35%;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.leftDiv{
+  width:48%;
+  text-align: center;
+  display: inline-block;
+  float: left;
+}
+
+.rightDiv{
+  width:48%;
+  text-align: center;
+  display: inline-block;
+  float: right;
+}
+
+.example-full-width-center{
+  width: 100%;
+  margin-left: 8px;
+  margin-right: 8px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.buttonsDiv{
+  display: block;
+  clear: both;
+}
+
