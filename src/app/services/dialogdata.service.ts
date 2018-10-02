@@ -5,6 +5,6 @@ export class DialogdataService {
   dialogTitle;
   dialogContent;
   closeButtonText;
-
+  pdfDownload:boolean;
   constructor() { }
 }

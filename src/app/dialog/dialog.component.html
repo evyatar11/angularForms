@@ -1,14 +1,8 @@
 <div class="container"><h2 mat-dialog-title>
-                           <!--[ngStyle]="{'margin-top':'20px',-->
-<!--'text-align':'center'}"-->
-<!--&gt;-->
   {{ dialogDataService.dialogTitle }}</h2>
 <mat-dialog-content>
-  <!--[ngStyle]="{'text-align':'center'}"-->
-<!--&gt;-->
   {{ dialogDataService.dialogContent }}</mat-dialog-content>
 <mat-dialog-actions>
-  <!--[ngStyle]="{'float':'right'}">-->
-  <button mat-button [mat-dialog-close]="true" class="btn btn-default"> {{ dialogDataService.closeButtonText }} </button>
+  <button mat-button [mat-dialog-close]="true" class="btn btn-default" (click)="checkPdfDownload()"> {{ dialogDataService.closeButtonText }} </button>
 </mat-dialog-actions>
 </div>

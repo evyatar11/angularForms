@@ -1,6 +1,4 @@
 
-<div class="container">
-
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Base lgd" [value]="lgdService.existingDealData.baseLgd" [disabled]="true">
   </mat-form-field>
@@ -51,7 +49,3 @@
   <div class="buttonsDiv" *ngIf="lgdService.showExistingDoneButton">
     <button mat-button class="btn btn-primary" (click)="routeToHomePage()">Done</button>
   </div>
-
-</div>
-
-

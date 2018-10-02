@@ -10,8 +10,6 @@ import {LgdService} from '../../services/lgd.service';
   styleUrls: ['./lgd.component.css']
 })
 export class LgdComponent implements OnInit {
-  lgdNewRatingGroup:FormGroup;
-  lgdDealScoreGroup:FormGroup;
   newRating=false;
   existingRating=false;
   openNewDealScore=false;
@@ -19,21 +17,20 @@ export class LgdComponent implements OnInit {
   constructor(private authService:AuthService,private lgdService:LgdService) { }
 
   ngOnInit() {
-    this.lgdDealScoreGroup = new FormGroup({
-      'EAD': new FormControl(null,Validators.required),
-      'Base LGD': new FormControl({value : '45%',disabled:true},Validators.required),
-      'cashAndSec': new FormControl(null,Validators.required),
-    });
   }
 
   onNewRatingSubmitted(event){
-      this.lgdNewRatingGroup = event;
+      this.lgdService.lgdNewRatingGroup = event;
       this.openNewDealScore = true;
   }
 
   onExistingDealScoreSubmitted(event:DealScore){
     this.lgdService.existingDealData = event;
     this.openExistingDealScore = true;
+  }
+
+  onNewDealScoreSubmit(event){
+    this.lgdService.lgdDealScoreGroup = event;
   }
 
 }
