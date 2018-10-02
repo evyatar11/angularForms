@@ -14,7 +14,7 @@ export class LgdComponent implements OnInit {
   existingRating=false;
   openNewDealScore=false;
   openExistingDealScore=false;
-  constructor(private authService:AuthService,private lgdService:LgdService) { }
+  constructor(private authService:AuthService,public lgdService:LgdService) { }
 
   ngOnInit() {
   }

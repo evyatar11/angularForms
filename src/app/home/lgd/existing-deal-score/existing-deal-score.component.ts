@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class ExistingDealScoreComponent implements OnInit {
 
-  constructor(private lgdService:LgdService,private router:Router) { }
+  constructor(public lgdService:LgdService,private router:Router) { }
 
   ngOnInit() {}
 
