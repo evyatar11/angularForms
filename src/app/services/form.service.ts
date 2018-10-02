@@ -11,8 +11,8 @@ import {Router} from '@angular/router';
 export class FormService {
   currentTab = 'Home';
   path = window.location.pathname === '' ? '/': window.location.pathname;
-  url = window.location.origin + this.path;
-  // url = 'http://localhost:8080/uspb/';
+  // url = window.location.origin + this.path;
+  url = 'http://localhost:8080/uspb/';
   selectedForm: Form;
   formProgress;
   formSubmission:FormSubmission = new FormSubmission();
