@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DialogdataService} from '../services/dialogdata.service';
-import * as jsPDF from "jspdf";
+import * as jsPDF from 'jspdf';
 import {DealScore} from '../models/DealScore';
 import {LgdService} from '../services/lgd.service';
 
@@ -127,51 +127,58 @@ export class DialogComponent implements OnInit {
       doc.text('Final LGD', (xXis + 85), yXis);
       doc.text( dealScore.finalLgd.toString(), (xXis + 85), (yXis +5));
 
-      yXis+= 20;
+      yXis+= 8;
 
       doc.setFontSize(8);
 
       dealScore.qaArr = JSON.parse(dealScore.qa);
 
-      doc.line(5, (yXis-5), 144, (yXis-5)); // vertical line
+      doc.line(5, yXis, 144, yXis); // vertical line
 
-      doc.text(doc.splitTextToSize(dealScore.qaArr[0].questionText, 60), xXis, yXis);
-      doc.text(doc.splitTextToSize(dealScore.qaArr[0].answerText, 60), xXis, (yXis +11));
+      doc.text(doc.splitTextToSize(dealScore.qaArr[0].questionText, 60), xXis, yXis+3);
+      doc.text(doc.splitTextToSize(dealScore.qaArr[0].answerText, 60), (xXis + 65), yXis+3);
 
-      doc.text(doc.splitTextToSize(dealScore.qaArr[1].questionText,60), (xXis + 65), yXis);
-      doc.text(doc.splitTextToSize(dealScore.qaArr[1].answerText, 60),(xXis + 65), (yXis +11));
+      yXis+= 13;
+      doc.line(5, yXis, 144, yXis); // vertical line
 
-      yXis+= 20;
+      doc.text(doc.splitTextToSize(dealScore.qaArr[1].questionText,60), xXis , yXis+3);
+      doc.text(doc.splitTextToSize(dealScore.qaArr[1].answerText, 60),(xXis + 65), yXis+3);
 
-      doc.line(5, (yXis-5), 144, (yXis-5)); // vertical line
+      yXis+= 13;
+      doc.line(5, yXis, 144, yXis); // vertical line
 
-      doc.text(doc.splitTextToSize(dealScore.qaArr[2].questionText, 60),xXis, yXis);
-      doc.text(doc.splitTextToSize(dealScore.qaArr[2].answerText, 60),xXis, (yXis +11));
+      doc.text(doc.splitTextToSize(dealScore.qaArr[2].questionText, 60),xXis, yXis+3);
+      doc.text(doc.splitTextToSize(dealScore.qaArr[2].answerText, 60),(xXis + 65), yXis+3 );
 
-      doc.text(doc.splitTextToSize(dealScore.qaArr[3].questionText, 60), (xXis + 65), yXis);
-      doc.text(doc.splitTextToSize(dealScore.qaArr[3].answerText, 60), (xXis + 65), (yXis +11));
+      yXis+= 13;
+      doc.line(5, yXis, 144, yXis); // vertical line
 
-      yXis+= 20;
+      doc.text(doc.splitTextToSize(dealScore.qaArr[3].questionText, 60), xXis , yXis+3);
+      doc.text(doc.splitTextToSize(dealScore.qaArr[3].answerText, 60), (xXis + 65), yXis+3);
 
-      doc.line(5, (yXis-5), 144, (yXis-5)); // vertical line
+      yXis+= 13;
+      doc.line(5, yXis, 144, yXis); // vertical line
 
-      doc.text(doc.splitTextToSize(dealScore.qaArr[4].questionText, 60), xXis, yXis);
-      doc.text(doc.splitTextToSize(dealScore.qaArr[4].answerText, 60), xXis, (yXis +11));
+      doc.text(doc.splitTextToSize(dealScore.qaArr[4].questionText, 60), xXis, yXis+3);
+      doc.text(doc.splitTextToSize(dealScore.qaArr[4].answerText, 60), (xXis + 65), yXis+3);
 
-      doc.text(doc.splitTextToSize(dealScore.qaArr[5].questionText, 60), (xXis + 65), yXis);
-      doc.text(doc.splitTextToSize(dealScore.qaArr[5].answerText, 60), (xXis + 65), (yXis +11));
+      yXis+= 13;
+      doc.line(5, yXis, 144, yXis); // vertical line
 
-      yXis+= 20;
+      doc.text(doc.splitTextToSize(dealScore.qaArr[5].questionText, 60), xXis , yXis+3);
+      doc.text(doc.splitTextToSize(dealScore.qaArr[5].answerText, 60), (xXis + 65), yXis+3);
 
-      doc.line(5, (yXis-5), 144, (yXis-5)); // vertical line
+      yXis+= 13;
+      doc.line(5, yXis, 144, yXis); // vertical line
 
-      doc.text(doc.splitTextToSize(dealScore.qaArr[6].questionText, 60), xXis, yXis);
-      doc.text(doc.splitTextToSize(dealScore.qaArr[6].answerText, 60), xXis, (yXis +11));
+      doc.text(doc.splitTextToSize(dealScore.qaArr[6].questionText, 60), xXis, yXis+3);
+      doc.text(doc.splitTextToSize(dealScore.qaArr[6].answerText, 60), (xXis + 65), yXis+3);
 
-      yXis+= 20;
-      doc.line(5, (yXis-5), 144, (yXis-5)); // vertical line
+      yXis+= 13;
+      doc.line(5, yXis, 144, yXis); // vertical line
 
       doc.setFontSize(10);
+      yXis+= 5;
 
       doc.text('Override LGD', xXis, yXis);
       doc.text('' + dealScore.overrideLgd, xXis, (yXis +5));
