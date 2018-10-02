@@ -124,8 +124,11 @@ export class DialogComponent implements OnInit {
       doc.text('Adjusted LGD', (xXis + 45), yXis);
       doc.text(dealScore.adjustedLgd.toString(), (xXis + 45), (yXis +5));
 
+      doc.setFontSize(11);
+      doc.setFontType('bold');
       doc.text('Final LGD', (xXis + 85), yXis);
       doc.text( dealScore.finalLgd.toString(), (xXis + 85), (yXis +5));
+      doc.setFontType('normal');
 
       yXis+= 8;
 
@@ -133,49 +136,49 @@ export class DialogComponent implements OnInit {
 
       dealScore.qaArr = JSON.parse(dealScore.qa);
 
-      doc.line(5, yXis, 144, yXis); // vertical line
+      doc.line(xXis, yXis, xXis+144, yXis); // vertical line
 
       doc.text(doc.splitTextToSize(dealScore.qaArr[0].questionText, 60), xXis, yXis+3);
       doc.text(doc.splitTextToSize(dealScore.qaArr[0].answerText, 60), (xXis + 65), yXis+3);
 
       yXis+= 13;
-      doc.line(5, yXis, 144, yXis); // vertical line
+      doc.line(xXis, yXis, xXis+144, yXis); // vertical line
 
       doc.text(doc.splitTextToSize(dealScore.qaArr[1].questionText,60), xXis , yXis+3);
       doc.text(doc.splitTextToSize(dealScore.qaArr[1].answerText, 60),(xXis + 65), yXis+3);
 
       yXis+= 13;
-      doc.line(5, yXis, 144, yXis); // vertical line
+      doc.line(xXis, yXis, xXis+144, yXis); // vertical line
 
       doc.text(doc.splitTextToSize(dealScore.qaArr[2].questionText, 60),xXis, yXis+3);
       doc.text(doc.splitTextToSize(dealScore.qaArr[2].answerText, 60),(xXis + 65), yXis+3 );
 
       yXis+= 13;
-      doc.line(5, yXis, 144, yXis); // vertical line
+      doc.line(xXis, yXis, xXis+144, yXis); // vertical line
 
       doc.text(doc.splitTextToSize(dealScore.qaArr[3].questionText, 60), xXis , yXis+3);
       doc.text(doc.splitTextToSize(dealScore.qaArr[3].answerText, 60), (xXis + 65), yXis+3);
 
       yXis+= 13;
-      doc.line(5, yXis, 144, yXis); // vertical line
+      doc.line(xXis, yXis, xXis+144, yXis); // vertical line
 
       doc.text(doc.splitTextToSize(dealScore.qaArr[4].questionText, 60), xXis, yXis+3);
       doc.text(doc.splitTextToSize(dealScore.qaArr[4].answerText, 60), (xXis + 65), yXis+3);
 
       yXis+= 13;
-      doc.line(5, yXis, 144, yXis); // vertical line
+      doc.line(xXis, yXis, xXis+144, yXis); // vertical line
 
       doc.text(doc.splitTextToSize(dealScore.qaArr[5].questionText, 60), xXis , yXis+3);
       doc.text(doc.splitTextToSize(dealScore.qaArr[5].answerText, 60), (xXis + 65), yXis+3);
 
       yXis+= 13;
-      doc.line(5, yXis, 144, yXis); // vertical line
+      doc.line(xXis, yXis, xXis+144, yXis); // vertical line
 
       doc.text(doc.splitTextToSize(dealScore.qaArr[6].questionText, 60), xXis, yXis+3);
       doc.text(doc.splitTextToSize(dealScore.qaArr[6].answerText, 60), (xXis + 65), yXis+3);
 
       yXis+= 13;
-      doc.line(5, yXis, 144, yXis); // vertical line
+      doc.line(xXis, yXis, xXis+144, yXis); // vertical line
 
       doc.setFontSize(10);
       yXis+= 5;
