@@ -8,6 +8,7 @@ import {BussinessUnit} from '../models/BussinessUnit';
 import {LgdQuestion} from '../models/LgdQuestion';
 import {DealScore} from '../models/DealScore';
 import {Borrower} from '../models/Borrower';
+import {FormGroup} from '@angular/forms';
 
 @Injectable()
 export class LgdService {
@@ -20,6 +21,9 @@ export class LgdService {
   url = 'http://localhost:8080/uspb/';
   existingDealData:DealScore = new DealScore();
   showExistingDoneButton = true;
+  isEditable = false;
+  lgdNewRatingGroup:FormGroup;
+  lgdDealScoreGroup:FormGroup;
 
 
   constructor(private http:Http,private authService:AuthService,private router:Router){}

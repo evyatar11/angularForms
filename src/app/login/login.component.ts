@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           this.dialogService.openDialog(
             'Authentication Succeeded',
             'Redirecting to home page',
-            'Close');
+            'Close',false);
             this.authService.generateTokenForUser(this.auth.username).subscribe(
               (tokenResponse:TokenResponse) => {
                 console.log(tokenResponse);
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           this.dialogService.openDialog(
             'Authentication Failed',
             'The provided credentials were incorrect.\n Please check your username/password and try again',
-            'Close');
+            'Close',false);
           // Log Failure
           this.logService.logFailedLogin(this.auth.username);
 
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
         this.dialogService.openDialog(
           'Error',
           'Something went wrong please try again',
-          'Close');
+          'Close',false);
       }
     );
   }

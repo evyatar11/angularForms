@@ -18,8 +18,14 @@ export class ExistingDealScoreComponent implements OnInit {
   }
 
   lockForCommitee(){
-    return this.lgdService.existingDealData.formStatus === 'draft' ? false : true;
+    if (this.lgdService.existingDealData.formStatus){
+      return this.lgdService.existingDealData.formStatus === 'draft' ? false : true;
+    }
+    else{
+      return false;
+    }
   }
 
 
 }
+
