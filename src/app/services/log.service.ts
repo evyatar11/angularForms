@@ -6,8 +6,8 @@ import {Observable, pipe} from 'rxjs';
 @Injectable()
 export class LogService {
   path = window.location.pathname === '' ? '/': window.location.pathname;
-  // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/uspb/';
+  url = window.location.origin + this.path;
+  // url = 'http://localhost:8080/uspb/';
   constructor(private http: Http) { }
 
   logSuccessfullyLogin(username: string) {

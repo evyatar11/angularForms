@@ -17,8 +17,8 @@ export class LgdService {
   dealScoreQuestions: LgdQuestion[];
   dealScoreSubmittionDetials:DealScore = new DealScore();
   path = window.location.pathname === '' ? '/': window.location.pathname;
-  // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/uspb/';
+  url = window.location.origin + this.path;
+  // url = 'http://localhost:8080/uspb/';
   existingDealData:DealScore = new DealScore();
   showExistingDoneButton = true;
   isEditable = false;
@@ -90,6 +90,26 @@ export class LgdService {
 
   getSubmittedBorrowers() {
     return this.http.get(this.url + 'lgd/getSubmittedBorrowers',
+      {headers:this.authService.getTokenHeaders()})
+      .pipe(
+        map(
+          (response: Response) => {
+            return response.json();
+          }
+        )
+        ,catchError(
+          (error:Response) => {
+            if(error.status === 401){
+              this.router.navigate(['/login']);
+            }
+            return Observable.throw('Form fetch failed');
+          }
+        )
+      );
+  }
+
+  getBorrowerLoans(borrower:Borrower) {
+    return this.http.get(this.url + 'lgd/getBorrowerLoans/' + borrower.borrowerId+'/' + borrower.borrowerName ,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(

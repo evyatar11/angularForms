@@ -42,18 +42,23 @@ export class ExistingRatingComponent implements OnInit {
   onUpdateBorrowerId(event:Borrower){
     if (event){
       this.selectedBorrowerName = event.borrowerName;
-      // set ot unset form validations
-      if(event.loans.length > 0 ){
-        this.showLoans = true;
-        this.loans = event.loans;
-        this.existingRatingGroup.get('loans.loanId').setValidators([Validators.required]);
-        this.existingRatingGroup.get('loans.loanId').updateValueAndValidity();
-      }
-      else{
-        this.showLoans = false;
-        this.existingRatingGroup.get('loans.loanId').clearValidators();
-        this.existingRatingGroup.get('loans.loanId').updateValueAndValidity();
-      }
+      // Get loans for selected borrower
+      this.lgdService.getBorrowerLoans(event).subscribe(
+        (value:string[])=>{
+          this.loans=value;
+          // set ot unset form validations
+          if(this.loans.length > 0 ){
+            this.showLoans = true;
+            this.existingRatingGroup.get('loans.loanId').setValidators([Validators.required]);
+            this.existingRatingGroup.get('loans.loanId').updateValueAndValidity();
+          }
+          else{
+            this.showLoans = false;
+            this.existingRatingGroup.get('loans.loanId').clearValidators();
+            this.existingRatingGroup.get('loans.loanId').updateValueAndValidity();
+          }
+        }
+      );
     }
   }
 
@@ -82,7 +87,13 @@ export class ExistingRatingComponent implements OnInit {
         this.dealScore.qaArr = JSON.parse(value.qa);
         // If suceed then emit event
         this.existingDealScoreGroupSubmitted.emit(this.dealScore);
-      });
+      }
+      ,(error) => {
+        if (error.name === 'TypeError'){
+          this.existingDealScoreGroupSubmitted.emit(new DealScore());
+        }
+      }
+      );
   }
 
   private getExistingDealScoreWithLoan(borrower:Borrower){
@@ -93,7 +104,13 @@ export class ExistingRatingComponent implements OnInit {
         this.dealScore.qaArr = JSON.parse(value.qa);
         // If suceed then emit event
         this.existingDealScoreGroupSubmitted.emit(this.dealScore);
-      });
+      }
+      ,(error) => {
+        if (error.name === 'TypeError'){
+          this.existingDealScoreGroupSubmitted.emit(new DealScore());
+        }
+      }
+      );
   }
 
 
