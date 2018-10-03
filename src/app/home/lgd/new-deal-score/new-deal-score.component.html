@@ -1,6 +1,6 @@
 <form [formGroup]="dealScoreGroup" (ngSubmit)="onDealFormSubmit()" >
   <div class="leftDiv" id="content" #content>
-    <label class="example-full-width">New Deal Score</label>
+    <label class="example-full-width" style="font-size: 16px; font-weight: bold; margin-top: 6px;">Post New Transaction</label>
     <br><br>
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Base LGD" type="number" [name]="lgdService.dealScoreSubmittionDetials.baseLgd" formControlName="baseLgd" [value]="lgdService.dealScoreSubmittionDetials.baseLgd">
@@ -30,7 +30,7 @@
       <mat-select [placeholder]="question.questionContent"
                   [formControlName]="'q' + question.id"
                   (selectionChange)="updateAdjustedLgd($event.value,question)">
-        <mat-option>Choose an answer</mat-option>
+        <mat-option style="font-size: 14px; font-weight: bold; font-style: italic;">{{ question.questionContent }}</mat-option>
         <mat-option *ngFor="let answer of question.answerList" [value]="answer">
           {{  answer.answerContent }}
         </mat-option>
@@ -83,7 +83,7 @@
 
   </div>
   <div class="rightDiv">
-    <label class="example-full-width">Existing Deal Score</label>
+    <label class="example-full-width" style="font-size: 16px; font-weight: bold; margin-top: 6px;">Pre New Transaction</label>
     <br><br>
     <app-existing-deal-score></app-existing-deal-score>
   </div>
