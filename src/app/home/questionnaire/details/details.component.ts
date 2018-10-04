@@ -4,6 +4,7 @@ import {FormService} from '../../../services/form.service';
 import {Form} from '../../../models/Form';
 import {TokenResponse} from '../../../models/TokenResponse';
 import {SubmittedFormRawData} from '../../../models/SubmittedFormRawData';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-details',
@@ -20,7 +21,7 @@ export class DetailsComponent implements OnInit {
     {value: 7}, {value: 8}, {value: 9}, {value: 10}
   ];
 
-  constructor(public formService: FormService) {}
+  constructor(public formService: FormService,public authService:AuthService) {}
 
   ngOnInit() {
     this.formService.getForms().subscribe(
@@ -33,7 +34,7 @@ export class DetailsComponent implements OnInit {
       }
     );
     this.formDetailsGroup = new FormGroup({
-      'officerName': new FormControl(null, Validators.required),// remove default value
+      'officerName': new FormControl({value : this.authService.getLoggedUser(), disabled: true}),// remove default value
       'borrowerId': new FormControl(null, Validators.required), // remove default value
       'borrowerRating': new FormControl(null,Validators.required), // remove default value
       'formId': new FormControl(null,Validators.required)

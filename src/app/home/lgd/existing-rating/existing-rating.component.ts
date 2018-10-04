@@ -14,7 +14,7 @@ export class ExistingRatingComponent implements OnInit {
   existingRatingGroup:FormGroup;
   @Output() existingDealScoreGroupSubmitted = new EventEmitter<DealScore>();
   borrowers:Borrower [];
-  selectedBorrowerName:string;
+  selectedBorrowerName='';
   loans = [];
   showLoans = false;
   dealScore: DealScore;

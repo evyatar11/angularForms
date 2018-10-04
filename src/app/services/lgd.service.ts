@@ -167,4 +167,47 @@ export class LgdService {
         )
       );
   }
+
+  getBorrowerNameById(borrowerId:number){
+    return this.http.get(this.url  +'lgd/getBorrowerNameById/' + borrowerId,
+      {headers:this.authService.getTokenHeaders()})
+      .pipe(
+        map(
+          (response: Response) => {
+            return response.text();          }
+        )
+        ,catchError(
+          (error:Response) => {
+            if(error.status === 401){
+              this.router.navigate(['/login']);
+            }
+            return Observable.throw('Form fetch failed');
+          }
+        )
+      );
+  }
+
+  getLoanNameById(loanId:number){
+    return this.http.get(this.url  +'lgd/getLoanNameById/' + loanId,
+      {headers:this.authService.getTokenHeaders()})
+      .pipe(
+        map(
+          (response: Response) => {
+            return response.text();
+          }
+    // res.json() //Convert response to JSON
+    // OR
+    // res.text() //Convert response to a string
+        )
+        ,catchError(
+          (error:Response) => {
+            if(error.status === 401){
+              this.router.navigate(['/login']);
+            }
+            return Observable.throw('Form fetch failed');
+          }
+        )
+      );
+  }
+
 }

@@ -3,7 +3,7 @@
     <label class="example-full-width">New Deal Score</label>
     <br><br>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Base LGD" type="number" [name]="lgdService.dealScoreSubmittionDetials.baseLgd" formControlName="baseLgd" [value]="lgdService.dealScoreSubmittionDetials.baseLgd">
+      <input matInput placeholder="Base LGD" formControlName="baseLgd" [value]="lgdService.dealScoreSubmittionDetials.baseLgd + '%'">
     </mat-form-field>
 
     <mat-form-field class="example-full-width" formGroupName="eadGroup">
@@ -23,7 +23,7 @@
     </mat-error>
 
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Modified Lgd" formControlName="modifiedLgd" type="number" [value]="modifiedLgd">
+      <input matInput placeholder="Modified Lgd" formControlName="modifiedLgd" [value]="modifiedLgd + '%'">
     </mat-form-field>
 
     <mat-form-field *ngFor="let question of lgdService.dealScoreQuestions" [floatLabel]="question.questionContent" class="example-full-width" formGroupName="questionsGroup">
@@ -42,7 +42,7 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width" *ngIf="dealScoreGroup.get('eadGroup.CashAndSec').valid && dealScoreGroup.get('questionsGroup').valid">
-      <input matInput placeholder="Adjusted Lgd" formControlName="adjustedLgd" type="number" [value]="adjustedLgd">
+      <input matInput placeholder="Adjusted Lgd" formControlName="adjustedLgd" [value]="adjustedLgd + '%'">
     </mat-form-field>
 
     <div class="example-full-width" *ngIf="dealScoreGroup.get('eadGroup.CashAndSec').valid && dealScoreGroup.get('questionsGroup').valid">
@@ -54,8 +54,9 @@
 
     <div *ngIf="lgdOverride" formGroupName="overrideLgdGroup" class="example-full-width">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Lgd Override" formControlName="overrideLgd" type="number"  [value]="overrideLgd"
+        <input matInput placeholder="Lgd Override(%)" type="number" formControlName="overrideLgd" [value]="overrideLgd"
                (input)="onOverrideLgdChange()">
+        <!--<span matPrefix>%</span>-->
         <mat-error *ngIf="!dealScoreGroup.get('overrideLgdGroup.overrideLgd').valid &&
       dealScoreGroup.get('overrideLgdGroup.overrideLgd').touched">
           Override value is required
@@ -71,7 +72,7 @@
     </div>
 
     <mat-form-field class="example-full-width" *ngIf="dealScoreGroup.get('eadGroup.CashAndSec').valid && dealScoreGroup.get('questionsGroup').valid">
-      <input matInput placeholder="Final Lgd" formControlName="finalLgd" type="number" [value]="finalLgd">
+      <input matInput placeholder="Final Lgd" formControlName="finalLgd" [value]="finalLgd + '%'">
     </mat-form-field>
 
     <div class="example-full-width">

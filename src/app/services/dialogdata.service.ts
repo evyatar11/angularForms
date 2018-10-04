@@ -6,5 +6,6 @@ export class DialogdataService {
   dialogContent;
   closeButtonText;
   pdfDownload:boolean;
+  showCloseButton:boolean;
   constructor() { }
 }

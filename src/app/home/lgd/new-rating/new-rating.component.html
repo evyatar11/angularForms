@@ -19,7 +19,7 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-half-width">
-      <input matInput placeholder="Borrower ID" formControlName="borrowerId" type="number">
+      <input matInput placeholder="Borrower ID" formControlName="borrowerId" type="number" (blur)="getBorrowerNameById($event.target.value)">
       <mat-error *ngIf="!newRatingGroup.get('borrowerId').valid &&
       newRatingGroup.get('borrowerId').touched">
         Borrower id is required
@@ -67,7 +67,7 @@
 
   <div *ngIf="!crossCollateralization" formGroupName="crossCollaterlize" class="container">
     <mat-form-field class="example-half-width">
-      <input matInput placeholder="Loan Id" formControlName="loanId" type="number">
+      <input matInput placeholder="Loan Id" formControlName="loanId" type="number" (blur)="getLoanNameById($event.target.value)">
       <mat-error *ngIf="!newRatingGroup.get('crossCollaterlize.loanId').valid &&
       newRatingGroup.get('crossCollaterlize.loanId').touched">
         Loan id is required

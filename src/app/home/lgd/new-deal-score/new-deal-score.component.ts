@@ -184,7 +184,9 @@ export class NewDealScoreComponent implements OnInit {
         this.dialogService.openDialog(
           'Deal score submitted successfully',
           '',
-          'Download DealScore PDF',true),
+          'Download DealScore PDF',
+          true,
+          true),
         // this.downloadPdf();
         this.router.navigate(['/home']);
       }

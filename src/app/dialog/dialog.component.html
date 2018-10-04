@@ -3,6 +3,7 @@
 <mat-dialog-content>
   {{ dialogDataService.dialogContent }}</mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true" class="btn btn-default" (click)="checkPdfDownload()"> {{ dialogDataService.closeButtonText }} </button>
+  <button *ngIf="dialogDataService.pdfDownload" mat-button [mat-dialog-close]="true" class="btn btn-default" (click)="checkPdfDownload()" [ngStyle]="{'margin':'auto'}"> {{ dialogDataService.closeButtonText }} </button>
+  <button *ngIf="dialogDataService.showCloseButton" mat-button [mat-dialog-close]="true" class="btn btn-default" [ngStyle]="{'margin':'auto'}"> Close </button>
 </mat-dialog-actions>
 </div>

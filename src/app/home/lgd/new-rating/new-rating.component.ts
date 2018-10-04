@@ -150,4 +150,48 @@ export class NewRatingComponent implements OnInit {
       this.lgdService.dealScoreSubmittionDetials.loanName = this.newRatingGroup.get('crossCollaterlize.loanName').value;
     }
   }
+
+  getBorrowerNameById(event:number){
+    if(event){
+      this.lgdService.getBorrowerNameById(event).subscribe(
+        (value)=>{
+          if (value){
+            this.newRatingGroup.get('borrowerName').setValue(value);
+            this.newRatingGroup.get('borrowerName').disable();
+            this.newRatingGroup.get('borrowerName').updateValueAndValidity();
+          }
+          else{
+            this.newRatingGroup.get('borrowerName').setValue('');
+            this.newRatingGroup.get('borrowerName').enable();
+            this.newRatingGroup.get('borrowerName').updateValueAndValidity();
+          }
+        }
+        ,(error)=>{
+
+        }
+      );
+    }
+  }
+
+  getLoanNameById(event:number){
+    if(event){
+      this.lgdService.getLoanNameById(event).subscribe(
+        (value)=>{
+          if (value){
+            this.newRatingGroup.get('crossCollaterlize.loanName').setValue(value);
+            this.newRatingGroup.get('crossCollaterlize.loanName').disable();
+            this.newRatingGroup.get('crossCollaterlize.loanName').updateValueAndValidity();
+          }
+          else{
+            this.newRatingGroup.get('crossCollaterlize.loanName').setValue('');
+            this.newRatingGroup.get('crossCollaterlize.loanName').enable();
+            this.newRatingGroup.get('crossCollaterlize.loanName').updateValueAndValidity();
+          }
+        }
+        ,(error)=>{
+
+        }
+      );
+    }
+  }
 }

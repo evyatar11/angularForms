@@ -1,6 +1,6 @@
 
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Base lgd" [value]="lgdService.existingDealData.baseLgd" [disabled]="true">
+    <input matInput placeholder="Base lgd" [value]="lgdService.existingDealData.baseLgd+ '%'" [disabled]="true">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
@@ -12,7 +12,7 @@
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Modified Lgd" [value]="lgdService.existingDealData.modifiedLgd" [disabled]="true">
+    <input matInput placeholder="Modified Lgd" [value]="lgdService.existingDealData.modifiedLgd+ '%'" [disabled]="true">
   </mat-form-field>
 
   <mat-form-field *ngFor="let qa of lgdService.existingDealData.qaArr" [floatLabel]="qa.questionText" class="example-full-width">
@@ -20,7 +20,7 @@
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Adjusted Lgd" [value]="lgdService.existingDealData.adjustedLgd" [disabled]="true">
+    <input matInput placeholder="Adjusted Lgd" [value]="lgdService.existingDealData.adjustedLgd+ '%'" [disabled]="true">
   </mat-form-field>
 
   <div class="example-full-width">
@@ -29,15 +29,16 @@
 
   <div *ngIf="lgdService.existingDealData.overrideReason">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Lgd Override" [value]="lgdService.existingDealData.overrideLgd" [disabled]="true">
+      <input matInput placeholder="Lgd Override" [value]="lgdService.existingDealData.overrideLgd+ '%'" [disabled]="true">
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Override Reason" [value]="lgdService.existingDealData.overrideReason" [disabled]="true">
     </mat-form-field>
   </div>
+  <br>
 
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Final Lgd" [value]="lgdService.existingDealData.finalLgd" [disabled]="true">
+    <input matInput placeholder="Final Lgd" [value]="lgdService.existingDealData.finalLgd+ '%'" [disabled]="true">
   </mat-form-field>
 
   <div class="example-full-width">
