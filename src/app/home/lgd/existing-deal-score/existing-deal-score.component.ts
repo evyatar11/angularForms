@@ -17,14 +17,14 @@ export class ExistingDealScoreComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  lockForCommitee(){
-    if (this.lgdService.existingDealData.formStatus){
-      return this.lgdService.existingDealData.formStatus === 'draft' ? false : true;
-    }
-    else{
-      return false;
-    }
-  }
+    lockForCommitee(){
+     if (this.lgdService.existingDealData.formStatus){
+       return this.lgdService.existingDealData.formStatus === 'draft' ? false : true;
+     }
+     else{
+       return false;
+     }
+   }
 
 
 }

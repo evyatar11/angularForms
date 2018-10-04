@@ -1,15 +1,15 @@
 
 <div class="container">
   <hr>
-  <label class="center-block text-center">LGD</label>
+  <label class="center-block text-center">LGD Questionnaire</label>
   <hr>
   <mat-vertical-stepper linear #stepper>
 
     <mat-step [stepControl]="lgdService.lgdNewRatingGroup">
-      <ng-template matStepLabel>Initial Details</ng-template>
+      <ng-template matStepLabel>Account officer, Borrower and Loan information</ng-template>
       <mat-radio-group class="example-full-width-center">
-        <mat-radio-button value="1" class="example-half-width" (change)="newRating=true;existingRating=false;openExistingDealScore=false;">Start a new rating process </mat-radio-button>
-        <mat-radio-button value="2" class="example-half-width" (change)="existingRating=true;newRating=false;openNewDealScore=false;">View an existing rating</mat-radio-button>
+        <mat-radio-button value="1" class="example-half-width" (change)="newRating=true;existingRating=false;openExistingDealScore=false;">Start a new LGD rating process </mat-radio-button>
+        <mat-radio-button value="2" class="example-half-width" (change)="existingRating=true;newRating=false;openNewDealScore=false;">View an existing LGD rating</mat-radio-button>
       </mat-radio-group>
       <br><br>
       <app-new-rating (newRatingGroupSubmitted)="onNewRatingSubmitted($event)" *ngIf="newRating"></app-new-rating>
@@ -17,7 +17,7 @@
     </mat-step>
 
     <mat-step [stepControl]="lgdService.lgdDealScoreGroup" [editable]="lgdService.isEditable" *ngIf="newRating">
-      <ng-template matStepLabel>New Deal Score</ng-template>
+      <ng-template matStepLabel>LGD Questionnaire</ng-template>
       <app-new-deal-score (lgdDealScoreGroup)="onNewDealScoreSubmit()" *ngIf="openNewDealScore"></app-new-deal-score>
     </mat-step>
 
