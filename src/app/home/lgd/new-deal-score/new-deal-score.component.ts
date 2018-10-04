@@ -110,7 +110,7 @@ export class NewDealScoreComponent implements OnInit {
   private calculateAdjustedLgd() {
     let tempLgd=this.modifiedLgd;
     this.detailedAnswersMap.forEach((value => {
-      tempLgd+=(value.modifier * value.weight / 1000);
+      tempLgd+=(value.modifier * value.weight / 100);
     }));
     tempLgd <= this.lgdService.minLgd ? this.adjustedLgd = this.lgdService.minLgd : this.adjustedLgd = +tempLgd.toPrecision(4);
     this.setFinalLgd(this.adjustedLgd);
