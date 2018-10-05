@@ -74,9 +74,6 @@ export class NewDealScoreComponent implements OnInit {
       calculateModifiedLgd > this.lgdService.minLgd
         ? this.modifiedLgd = +calculateModifiedLgd.toPrecision(4)
         : this.modifiedLgd = this.lgdService.minLgd;
-      if (this.dealScoreGroup.get('questionsGroup').valid){
-        this.calculateAdjustedLgd();
-      }
     }
     else{
       if (ead > 0){
@@ -86,6 +83,10 @@ export class NewDealScoreComponent implements OnInit {
       else{
         this.modifiedLgd = this.lgdService.minLgd;
       }
+    }
+    // Update adjusted LGD when questions valid
+    if (this.dealScoreGroup.get('questionsGroup').valid){
+      this.calculateAdjustedLgd();
     }
   }
 
