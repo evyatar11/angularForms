@@ -68,3 +68,12 @@ margin-bottom: 8px;
   clear: both;
 }
 
+.selectCustomHeader{
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  white-space: normal;
+  line-height: 20px;
+}
+
+

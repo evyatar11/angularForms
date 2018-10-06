@@ -26,11 +26,11 @@
       <input matInput placeholder="Modified Lgd" formControlName="modifiedLgd" [value]="modifiedLgd + '%'">
     </mat-form-field>
 
-    <mat-form-field *ngFor="let question of lgdService.dealScoreQuestions" [floatLabel]="question.questionContent" class="example-full-width" formGroupName="questionsGroup">
-      <mat-select [placeholder]="question.questionContent"
-                  [formControlName]="'q' + question.id"
+    <mat-form-field *ngFor="let question of lgdService.dealScoreQuestions" class="example-full-width" formGroupName="questionsGroup">
+      <label>{{ question.questionContent }}</label>
+      <mat-select [formControlName]="'q' + question.id"
                   (selectionChange)="updateAdjustedLgd($event.value,question)">
-        <mat-option style="font-size: 14px; font-weight: bold; font-style: italic;">{{ question.questionContent }}</mat-option>
+        <mat-option class="selectCustomHeader">{{ question.questionContent }}</mat-option>
         <mat-option *ngFor="let answer of question.answerList" [value]="answer">
           {{  answer.answerContent }}
         </mat-option>

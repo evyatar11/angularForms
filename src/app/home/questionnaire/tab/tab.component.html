@@ -3,8 +3,9 @@
     <mat-tab-group>
       <mat-tab *ngFor="let category of formService.selectedForm.categoriesList"
                [label]="category.categoryName">
-        <mat-form-field *ngFor="let question of category.questionList" [floatLabel]="question.questionContent" class="example-full-width">
-          <mat-select [placeholder]="question.questionContent"
+        <mat-form-field *ngFor="let question of category.questionList" class="example-full-width">
+          <label>{{ question.questionContent }}</label>
+          <mat-select
                       [formControlName]="'q' + question.questionId"
                       (selectionChange)="updateTableModule(category,question,$event.value)">
             <mat-option style="font-size: 14px; font-weight: bold; font-style: italic;">{{ question.questionContent }}</mat-option>
