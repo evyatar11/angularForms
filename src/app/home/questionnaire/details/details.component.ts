@@ -55,8 +55,8 @@ export class DetailsComponent implements OnInit {
     this.formService.formSubmission.borrowerRating = this.formDetailsGroup.get('borrowerRating').value;
 
     this.formService.formSubmission.submittedFormRawData.accountOfficeName = this.formService.formSubmission.accountOfficeName;
-    this.formService.formSubmission.submittedFormRawData.customerName = this.formService.formSubmission.customerName
-    this.formService.formSubmission.submittedFormRawData.borrowerRating = this.formService.formSubmission.borrowerRating
+    this.formService.formSubmission.submittedFormRawData.customerName = this.formService.formSubmission.customerName;
+    this.formService.formSubmission.submittedFormRawData.borrowerRating = this.formService.formSubmission.borrowerRating;
 
   }
 

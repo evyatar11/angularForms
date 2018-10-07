@@ -27,9 +27,10 @@
     </mat-form-field>
 
     <mat-form-field *ngFor="let question of lgdService.dealScoreQuestions" class="example-full-width" formGroupName="questionsGroup">
-      <label>{{ question.questionContent }}</label>
+      <!--<label>{{ question.questionContent }}</label>-->
       <mat-select [formControlName]="'q' + question.id"
-                  (selectionChange)="updateAdjustedLgd($event.value,question)">
+                  (selectionChange)="updateAdjustedLgd($event.value,question)"
+      [placeholder]="question.questionContent">
         <mat-option class="selectCustomHeader">{{ question.questionContent }}</mat-option>
         <mat-option *ngFor="let answer of question.answerList" [value]="answer">
           {{  answer.answerContent }}
