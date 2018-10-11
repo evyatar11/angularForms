@@ -8,8 +8,8 @@ import {
   MatIconModule, MatFormFieldModule,
   MatSelectModule, MatStepperModule,
   MatTabsModule, MatCardModule, MatInputModule,
-  MatTableModule, MatDialog, MatDialogModule,
-  MatRadioModule,MatCheckboxModule
+  MatTableModule, MatDialogModule,
+  MatRadioModule,MatCheckboxModule,MatProgressSpinnerModule
 } from '@angular/material';
 
 
@@ -83,6 +83,7 @@ const appRoutes: Routes  = [
     MatDialogModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
     CookieModule.forRoot(),
     HttpModule

@@ -6,6 +6,7 @@ import {Question} from '../../../models/Question';
 import {Answer} from '../../../models/Answer';
 import {Http} from '@angular/http';
 import {FormSubmission} from '../../../models/FormSubmission';
+import {USPBpdConv} from '../../../models/USPBpdConv';
 
 @Component({
   selector: 'app-tab',
@@ -32,6 +33,7 @@ export class TabComponent implements OnInit {
   }
 
   onTabsFormSubmit() {
+    this.formService.showSpinner = true;
     this.formService.detailedAnswersMap.forEach(value => {
       // Add score to final score before rounding
       this.formService.pdScore+=value.effectiveScore;
@@ -49,24 +51,37 @@ export class TabComponent implements OnInit {
     // Round final PD score after calculation
     this.formService.pdScore = +this.formService.pdScore.toPrecision(3);
 
-    this.formService.formSubmission.pdScore = this.formService.pdScore.toString();
+    this.formService.formSubmission.score = this.formService.pdScore.toString();
 
-    this.formService.submitForm(this.formService.formSubmission).subscribe(
-      (response) => {
-        this.formService.submittedFormId = response.id;
-        console.log('form submitted successfully' + response);
-        // Save form state
-        this.formService.saveFormState(this.tabsDetails);
-        // Trigger an event for submitting all questions
-        this.tabsSubmitted.emit(this.tabsDetails);
-        // Show table copmponent
-        this.formService.showTableAndGraph = true;
-        // Block previous steps
-        this.formService.isEditable= false;
+    this.formService.getUpdatedPdAndRatingByScore(this.formService.pdScore).subscribe(
+      (response:USPBpdConv)=>{
+        this.formService.formSubmission.updatedRating=response.updatedRating;
+        this.formService.formSubmission.pdScore=response.pdScore;
+        // Submit
+        this.formService.submitForm(this.formService.formSubmission).subscribe(
+          (formSubmitResponse) => {
+            this.formService.submittedFormId = formSubmitResponse.id;
+            console.log('form submitted successfully' + formSubmitResponse);
+            // Save form state
+            this.formService.saveFormState(this.tabsDetails);
+            // Trigger an event for submitting all questions
+            this.tabsSubmitted.emit(this.tabsDetails);
+            // Show table copmponent
+            this.formService.showTableAndGraph = true;
+            // Block previous steps
+            this.formService.isEditable= false;
+            // Release spinner
+            this.formService.showSpinner = false;
+          }
+          ,
+          (error) => {
+            console.log('error submitting form' + error);
+          }
+        );
       }
       ,
       (error) => {
-        console.log('error submitting form' + error);
+        console.log('error getting updated pd score and rating' + error);
       }
     );
   }

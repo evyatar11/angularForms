@@ -4,6 +4,8 @@ export class FormSubmission{
   accountOfficeName: string;
   customerName: string;
   borrowerRating: string;
-  pdScore: string;
+  score: string;
   submittedFormRawData: SubmittedFormRawData;
+  updatedRating:number;
+  pdScore:number;
 }

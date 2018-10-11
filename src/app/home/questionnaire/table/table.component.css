@@ -8,13 +8,17 @@ table {
   width: 100%;
 }
 
-td.mat-column-star {
-  width: 20px;
-  padding-right: 8px;
+td{
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+  font-size: 16px;
 }
 
-th.mat-column-position, td.mat-column-position {
-  padding-left: 8px;
+th{
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .mat-table-sticky{
@@ -24,7 +28,8 @@ th.mat-column-position, td.mat-column-position {
 }
 
 .center-block {
-  display: block;
+  display: inline-block;
+  width: 33%;
   margin-right: auto;
   text-align: center;
   font-weight: bold;
@@ -44,8 +49,3 @@ th.mat-column-position, td.mat-column-position {
   border-bottom-width: 1px;
   border-bottom-style: solid;
 }
-
-/*tr.mat-header-row ng-star-inserted{*/
-  /*font-size:20px;*/
-  /*font-weight: 900;*/
-/*}*/

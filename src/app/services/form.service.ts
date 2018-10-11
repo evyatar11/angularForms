@@ -12,9 +12,10 @@ export class FormService {
   currentTab = 'Home';
   path = window.location.pathname === '' ? '/': window.location.pathname;
   // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/uspb/';
+  url = 'http://localhost:8080/PDLGD/';
   selectedForm: Form;
   formProgress;
+  showSpinner = false;
   formSubmission:FormSubmission = new FormSubmission();
 
   detailedAnswersMap = new Map<number, {
@@ -115,6 +116,26 @@ export class FormService {
 
   saveFormState(formState) {
     this.formProgress = formState;
+  }
+
+  getUpdatedPdAndRatingByScore(score:number){
+    return this.http.get(this.url +'submittedForms/getUpdatedPdAndRating/' +score ,
+      {headers:this.authService.getTokenHeaders()})
+      .pipe(
+        map(
+          (response: Response) => {
+            return response.json();
+          }
+        )
+        ,catchError(
+          (error: Response) => {
+            if(error.status === 401){
+              this.router.navigate(['/login']);
+            }
+            return Observable.throw('Form fetch failed');
+          }
+        )
+      );
   }
 
 }

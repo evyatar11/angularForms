@@ -2,7 +2,6 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormService} from '../../../services/form.service';
 import {Form} from '../../../models/Form';
-import {TokenResponse} from '../../../models/TokenResponse';
 import {SubmittedFormRawData} from '../../../models/SubmittedFormRawData';
 import {AuthService} from '../../../services/auth.service';
 

@@ -11,7 +11,7 @@ import {CookieService} from 'ngx-cookie';
 export class AuthService {
   path = window.location.pathname === '' ? '/': window.location.pathname;
   // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/uspb/';
+  url = 'http://localhost:8080/PDLGD/';
 
   constructor(private http: Http,private cookieService: CookieService ) {}
 

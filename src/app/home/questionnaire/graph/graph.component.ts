@@ -21,7 +21,7 @@ export class GraphComponent implements OnInit{
         this.submittedForms = response;
         this.chart = this.createChart('canvas',
           this.submittedForms,
-          {borrowerRating: this.formService.formSubmission.borrowerRating,pdScore:this.formService.formSubmission.pdScore});
+          {borrowerRating: this.formService.formSubmission.borrowerRating,pdScore:this.formService.formSubmission.score});
       },
       (error) =>{
         console.log('submitted forms fetching failed' +error);

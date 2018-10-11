@@ -18,7 +18,7 @@ export class LgdService {
   dealScoreSubmittionDetials:DealScore = new DealScore();
   path = window.location.pathname === '' ? '/': window.location.pathname;
   // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/uspb/';
+  url = 'http://localhost:8080/PDLGD/';
   existingDealData:DealScore = new DealScore();
   showExistingDoneButton = true;
   isEditable = false;

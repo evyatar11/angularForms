@@ -6,7 +6,8 @@
   <mat-vertical-stepper linear #stepper>
 
     <mat-step [stepControl]="formDetailsSubmitted" [editable]="formService.isEditable">
-      <ng-template matStepLabel>Account officer and Borrower information</ng-template>
+      <ng-template matStepLabel>Account officer and Borrower information
+      </ng-template>
       <app-details (detailsFormSubmitted)="onDetailsFormSubmitted($event)"></app-details>
     </mat-step>
 
@@ -16,7 +17,9 @@
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Assessment Results</ng-template>
+      <ng-template matStepLabel>Assessment Results
+        <mat-spinner *ngIf="formService.showSpinner" diameter="25" strokeWidth="4"></mat-spinner>
+      </ng-template>
       <app-table *ngIf="formService.showTableAndGraph"></app-table>
     </mat-step>
 
