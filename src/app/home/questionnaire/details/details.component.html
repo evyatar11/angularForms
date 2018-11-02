@@ -1,11 +1,7 @@
 <div class="container">
   <form [formGroup]="formDetailsGroup" (ngSubmit)="onDeailsFormSubmit()" class="example-form">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Account Officer Identifier" formControlName="officerName">
-      <!--<mat-error *ngIf="!formDetailsGroup.get('officerName').valid &&-->
-      <!--formDetailsGroup.get('officerName').touched">-->
-        <!--Officer name is required-->
-      <!--</mat-error>-->
+      <input matInput placeholder="Account Officer Identifier" formControlName="officerName" >
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <input matInput placeholder="CIF#/Borrower Identifier" formControlName="borrowerId">

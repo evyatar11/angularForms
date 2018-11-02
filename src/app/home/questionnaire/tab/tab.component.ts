@@ -35,6 +35,7 @@ export class TabComponent implements OnInit {
   onTabsFormSubmit() {
     this.formService.showSpinner = true;
     this.formService.detailedAnswersMap.forEach(value => {
+      this.formService.pdScore=0;
       // Add score to final score before rounding
       this.formService.pdScore+=value.effectiveScore;
       // Round question score
@@ -57,27 +58,9 @@ export class TabComponent implements OnInit {
       (response:USPBpdConv)=>{
         this.formService.formSubmission.updatedRating=response.updatedRating;
         this.formService.formSubmission.pdScore=response.pdScore;
-        // Submit
-        this.formService.submitForm(this.formService.formSubmission).subscribe(
-          (formSubmitResponse) => {
-            this.formService.submittedFormId = formSubmitResponse.id;
-            console.log('form submitted successfully' + formSubmitResponse);
-            // Save form state
-            this.formService.saveFormState(this.tabsDetails);
-            // Trigger an event for submitting all questions
-            this.tabsSubmitted.emit(this.tabsDetails);
-            // Show table copmponent
-            this.formService.showTableAndGraph = true;
-            // Block previous steps
-            this.formService.isEditable= false;
-            // Release spinner
-            this.formService.showSpinner = false;
-          }
-          ,
-          (error) => {
-            console.log('error submitting form' + error);
-          }
-        );
+        // Show table copmponent
+        this.formService.showTableAndGraph = true;
+        this.formService.showSpinner=false;
       }
       ,
       (error) => {

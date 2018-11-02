@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {DealScore} from '../../models/DealScore';
 import {LgdService} from '../../services/lgd.service';
@@ -16,8 +15,7 @@ export class LgdComponent implements OnInit {
   openExistingDealScore=false;
   constructor(private authService:AuthService,public lgdService:LgdService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onNewRatingSubmitted(event){
       this.lgdService.lgdNewRatingGroup = event;
@@ -31,6 +29,10 @@ export class LgdComponent implements OnInit {
 
   onNewDealScoreSubmit(event){
     this.lgdService.lgdDealScoreGroup = event;
+  }
+
+  onRadioButtonChange(event){
+
   }
 
 }

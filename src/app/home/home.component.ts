@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LgdService} from '../services/lgd.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +8,7 @@ import {LgdService} from '../services/lgd.service';
 })
 export class HomeComponent implements OnInit {
   navigatedOut=false;
-  constructor(private router:Router,private lgdService:LgdService){}
+  constructor(private router:Router){}
 
   onTileClicked(path){
     this.router.navigate(['/'+path]);

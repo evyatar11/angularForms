@@ -24,7 +24,6 @@ import { HomeComponent } from './home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { CookieModule } from 'ngx-cookie';
-import { SignupComponent } from './signup/signup.component';
 import {AuthService} from './services/auth.service';
 import {FormService} from './services/form.service';
 import {HttpModule} from '@angular/http';
@@ -37,11 +36,11 @@ import { NewRatingComponent } from './home/lgd/new-rating/new-rating.component';
 import {NewDealScoreComponent} from './home/lgd/new-deal-score/new-deal-score.component';
 import { ExistingDealScoreComponent } from './home/lgd/existing-deal-score/existing-deal-score.component';
 import {LgdService} from './services/lgd.service';
+import { AuthenticationDirectiveDirective } from './directives/authentication-directive.directive';
 
 const appRoutes: Routes  = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
   { path: 'questionnaire', component: QuestionnaireComponent },
   { path: 'lgd', component: LgdComponent },
   { path: '**', component: HomeComponent }
@@ -59,12 +58,12 @@ const appRoutes: Routes  = [
     GraphComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent,
     DialogComponent,
     ExistingRatingComponent,
     NewRatingComponent,
     NewDealScoreComponent,
-    ExistingDealScoreComponent
+    ExistingDealScoreComponent,
+    AuthenticationDirectiveDirective
   ],
   imports: [
     BrowserModule,

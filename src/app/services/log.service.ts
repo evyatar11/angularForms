@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import {catchError, map} from 'rxjs/operators';
-import {Http, Response} from '@angular/http';
-import {Observable, pipe} from 'rxjs';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class LogService {
-  path = window.location.pathname === '' ? '/': window.location.pathname;
-  // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/PDLGD/';
-  constructor(private http: Http) { }
+  baseUrl:string;
+  constructor(private http: Http) {
+    this.baseUrl = window.location.pathname === '' ? '/': window.location.pathname;
+  }
 
   logSuccessfullyLogin(username: string) {
-    this.http.get(this.url+'log/logSuccessfulLogin/' + username).subscribe();
+    this.http.get(this.baseUrl+'log/logSuccessfulLogin/' + username).subscribe();
   }
 
   logFailedLogin(username: string) {
-    this.http.get(this.url+'log/logFailedLogin/' +username).subscribe();
+    this.http.get(this.baseUrl+'log/logFailedLogin/' +username).subscribe();
   }
 }

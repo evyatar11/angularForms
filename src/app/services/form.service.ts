@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Form} from '../models/Form';
 import {Http, Response} from '@angular/http';
-import {catchError, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {catchError, map, shareReplay} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {FormSubmission} from '../models/FormSubmission';
 import {AuthService} from './auth.service';
 import {Router} from '@angular/router';
@@ -10,9 +10,7 @@ import {Router} from '@angular/router';
 @Injectable()
 export class FormService {
   currentTab = 'Home';
-  path = window.location.pathname === '' ? '/': window.location.pathname;
-  // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/PDLGD/';
+  baseUrl:string;
   selectedForm: Form;
   formProgress;
   showSpinner = false;
@@ -31,32 +29,47 @@ export class FormService {
   pdScore = 0;
   submittedFormId: number;
   isEditable = true;
+  formsCache:Observable<any>;
+  // Observable navItem source
+  loggedUserSource;
+  // Observable navItem stream
+  loggedUserObservable;
 
   constructor(private http:Http,private authService:AuthService,
-              private router:Router){}
+              private router:Router){
+    this.baseUrl = window.location.pathname === '' ? '/': window.location.pathname;
+    this.loggedUserSource = new BehaviorSubject<string>(this.authService.getLoggedUser());
+    this.loggedUserObservable = this.loggedUserSource.asObservable();
+  }
 
   getForms() {
-    return this.http.get(this.url + 'forms/getForms',
-      {headers:this.authService.getTokenHeaders()})
-      .pipe(
-        map(
-          (response: Response) => {
-            return response.json();
+    if(!this.formsCache){
+      this.formsCache = this.http.get(this.baseUrl + 'forms/getForms',
+        {headers:this.authService.getTokenHeaders()})
+        .pipe(
+          map(
+            (response: Response) => {
+              return response.json();
+            }))
+        .pipe(
+          shareReplay(1)
+             )
+        .pipe(
+          catchError(
+        (error:Response) => {
+          if(error.status === 401){
+            this.router.navigate(['/login']);
           }
-        )
-        ,catchError(
-          (error:Response) => {
-            if(error.status === 401){
-              this.router.navigate(['/login']);
-            }
-            return Observable.throw('Form fetch failed');
-          }
-        )
-      );
+          return Observable.throw('Form fetch failed');
+        }
+      )
+        );
+    }
+    return this.formsCache;
   }
 
   submitForm(formToSubmit: FormSubmission){
-    return this.http.post(this.url +'submittedForms/submitForm',formToSubmit,
+    return this.http.post(this.baseUrl +'submittedForms/submitForm',formToSubmit,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -76,7 +89,7 @@ export class FormService {
   }
 
   deleteForm(){
-    return this.http.delete(this.url + 'submittedForms/deleteSubmittedFormById/'+ this.submittedFormId,
+    return this.http.delete(this.baseUrl + 'submittedForms/deleteSubmittedFormById/'+ this.submittedFormId,
       {headers:this.authService.getTokenHeaders()}
   ).pipe(
       catchError(
@@ -91,7 +104,7 @@ export class FormService {
   }
 
   getSubmittedForms() {
-    return this.http.get(this.url +'submittedForms/getSubmittedForms',
+    return this.http.get(this.baseUrl +'submittedForms/getSubmittedForms',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -119,7 +132,7 @@ export class FormService {
   }
 
   getUpdatedPdAndRatingByScore(score:number){
-    return this.http.get(this.url +'submittedForms/getUpdatedPdAndRating/' +score ,
+    return this.http.get(this.baseUrl +'submittedForms/getUpdatedPdAndRating/' +score ,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(

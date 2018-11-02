@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, shareReplay} from 'rxjs/operators';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
@@ -16,40 +16,47 @@ export class LgdService {
   units:BussinessUnit [];
   dealScoreQuestions: LgdQuestion[];
   dealScoreSubmittionDetials:DealScore = new DealScore();
-  path = window.location.pathname === '' ? '/': window.location.pathname;
-  // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/PDLGD/';
+  baseUrl:string;
   existingDealData:DealScore = new DealScore();
   showExistingDoneButton = true;
   isEditable = false;
   lgdNewRatingGroup:FormGroup;
   lgdDealScoreGroup:FormGroup;
+  bussinessUnitsCache:Observable<any>;
+  dealScoreQuestionCache:Observable<any>;
 
-
-  constructor(private http:Http,private authService:AuthService,private router:Router){}
+  constructor(private http:Http,private authService:AuthService,private router:Router){
+    this.baseUrl = window.location.pathname === '' ? '/': window.location.pathname;
+  }
 
   getBussinessUnits() {
-      return this.http.get(this.url+ 'lgd/getBussinessUnits',
-        {headers:this.authService.getTokenHeaders()})
+    if (!this.bussinessUnitsCache) {
+      this.bussinessUnitsCache = this.http.get(this.baseUrl + 'lgd/getBussinessUnits',
+        {headers: this.authService.getTokenHeaders()})
         .pipe(
           map(
             (response: Response) => {
               return response.json();
             }
           )
-          ,catchError(
-            (error:Response) => {
-              if(error.status === 401){
+          , catchError(
+            (error: Response) => {
+              if (error.status === 401) {
                 this.router.navigate(['/login']);
               }
               return Observable.throw('Form fetch failed');
             }
           )
+        ).pipe(
+          shareReplay(1)
         );
     }
+    return this.bussinessUnitsCache;
+  }
 
   getDealScoreQuestions() {
-    return this.http.get(this.url+ 'lgd/getLgdQuestions',
+    if (!this.bussinessUnitsCache) {
+      this.dealScoreQuestionCache = this.http.get(this.baseUrl+ 'lgd/getLgdQuestions',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -65,11 +72,15 @@ export class LgdService {
             return Observable.throw('Form fetch failed');
           }
         )
-      );
+      ).pipe(
+          shareReplay(1)
+        );
+    }
+     return this.dealScoreQuestionCache;
   }
 
   submitLgd(){
-    return this.http.post(this.url + 'lgd/submit',this.dealScoreSubmittionDetials,
+    return this.http.post(this.baseUrl + 'lgd/submit',this.dealScoreSubmittionDetials,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -89,7 +100,7 @@ export class LgdService {
   }
 
   getSubmittedBorrowers() {
-    return this.http.get(this.url + 'lgd/getSubmittedBorrowers',
+    return this.http.get(this.baseUrl + 'lgd/getSubmittedBorrowers',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -109,7 +120,7 @@ export class LgdService {
   }
 
   getBorrowerLoans(borrower:Borrower) {
-    return this.http.get(this.url + 'lgd/getBorrowerLoans/' + borrower.borrowerId+'/' + borrower.borrowerName ,
+    return this.http.get(this.baseUrl + 'lgd/getBorrowerLoans/' + borrower.borrowerId+'/' + borrower.borrowerName ,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -129,7 +140,7 @@ export class LgdService {
   }
 
   getExistingDealDetails(borrower:Borrower) {
-    return this.http.get(this.url  +'lgd/getLastSubmittedFromByBorrower/' + borrower.borrowerId + '/' +borrower.borrowerName,
+    return this.http.get(this.baseUrl  +'lgd/getLastSubmittedFromByBorrower/' + borrower.borrowerId + '/' +borrower.borrowerName,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -149,7 +160,7 @@ export class LgdService {
   }
 
   getExistingDealDetailsWithLoan(borrower:Borrower,loanId:number) {
-    return this.http.get(this.url  +'lgd/getLastSubmittedFromByBorrowerAndLoan/' +
+    return this.http.get(this.baseUrl  +'lgd/getLastSubmittedFromByBorrowerAndLoan/' +
       borrower.borrowerId + '/' + borrower.borrowerName + '/' + loanId,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
@@ -169,7 +180,7 @@ export class LgdService {
   }
 
   getBorrowerNameById(borrowerId:number){
-    return this.http.get(this.url  +'lgd/getBorrowerNameById/' + borrowerId,
+    return this.http.get(this.baseUrl  +'lgd/getBorrowerNameById/' + borrowerId,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(
@@ -188,7 +199,7 @@ export class LgdService {
   }
 
   getLoanNameById(loanId:number){
-    return this.http.get(this.url  +'lgd/getLoanNameById/' + loanId,
+    return this.http.get(this.baseUrl  +'lgd/getLoanNameById/' + loanId,
       {headers:this.authService.getTokenHeaders()})
       .pipe(
         map(

@@ -14,7 +14,7 @@ export class ExistingDealScoreComponent implements OnInit {
   ngOnInit() {}
 
   routeToHomePage(){
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
     lockForCommitee(){

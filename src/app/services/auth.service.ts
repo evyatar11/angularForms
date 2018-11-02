@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import {catchError, map} from 'rxjs/operators';
-
 import { Observable } from 'rxjs/Observable';
 import {Auth} from '../models/Auth';
 import {TokenResponse} from '../models/TokenResponse';
@@ -9,15 +8,13 @@ import {CookieService} from 'ngx-cookie';
 
 @Injectable()
 export class AuthService {
-  path = window.location.pathname === '' ? '/': window.location.pathname;
-  // url = window.location.origin + this.path;
-  url = 'http://localhost:8080/PDLGD/';
-
-  constructor(private http: Http,private cookieService: CookieService ) {}
+  baseUrl:string;
+  constructor(private http: Http,private cookieService: CookieService ) {
+    this.baseUrl = window.location.pathname === '' ? '/': window.location.pathname;
+  }
 
   authenticateUser(auth: Auth) {
-    // const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.post(this.url+ 'auth/authenticateUser', auth)
+    return this.http.post(this.baseUrl+ 'auth/authenticateUser', auth)
       .pipe(
         map(
           (response: Response) => {
@@ -34,7 +31,7 @@ export class AuthService {
 
   generateTokenForUser(username){
     // const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.get(this.url + 'auth/generateTokenForUser/' +username)
+    return this.http.get(this.baseUrl + 'auth/generateTokenForUser/' +username)
       .pipe(
         map(
           (response: Response) => {
@@ -53,8 +50,8 @@ export class AuthService {
     this.cookieService.putObject('token',{ username : tokenResponse.username , token : tokenResponse.token});
   }
 
-  checkTokenValidity(cookie: TokenResponse) {
-    return this.http.post(this.url + 'auth/validateTokenForUser', cookie)
+  checkTokenValidity() {
+    return this.http.post(this.baseUrl + 'auth/validateTokenForUser', this.getTokenObject())
       .pipe(
         map(
           (response: Response) => {

@@ -15,12 +15,20 @@ import {DialogService} from '../services/dialog.service';
 export class LoginComponent implements OnInit {
   auth:Auth;
   signUpGroup: FormGroup;
+  authInProgress = false;
   constructor(private router: Router,
               private authService:AuthService,
               private logService:LogService,
               private dialogService:DialogService) {}
 
   ngOnInit() {
+    this.authService.checkTokenValidity().subscribe(
+      (response) => {
+        if(response){
+          this.router.navigate(['/']);
+        }
+      }
+    );
     this.signUpGroup = new FormGroup({
       'username': new FormControl(null, Validators.required),
       'password': new FormControl(null, Validators.required)
@@ -28,12 +36,12 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(){
+    this.authInProgress = true;
     this.auth = new Auth();
     this.auth.username = this.signUpGroup.get('username').value;
     this.auth.password = this.signUpGroup.get('password').value;
     this.authService.authenticateUser(this.auth).subscribe(
       (response) => {
-        console.log(response);
         if (response){
           // Open dialog
           this.dialogService.openDialog(
@@ -62,7 +70,7 @@ export class LoginComponent implements OnInit {
             true);
           // Log Failure
           this.logService.logFailedLogin(this.auth.username);
-
+          this.authInProgress = false;
         }
       }
       ,
@@ -75,6 +83,7 @@ export class LoginComponent implements OnInit {
           'Close',
           false,
           true);
+        this.authInProgress = false;
       }
     );
   }

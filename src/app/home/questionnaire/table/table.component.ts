@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormService} from '../../../services/form.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -16,8 +17,7 @@ export class TableComponent implements OnInit {
     'Question Weight',
     'Selected Answer Score',
     'Effective Score'];
-
-  constructor(public formService:FormService) { }
+  constructor(public formService:FormService,public router: Router) { }
 
   ngOnInit() {
   }

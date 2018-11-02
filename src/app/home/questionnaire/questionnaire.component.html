@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" appAuthentication>
   <hr>
   <label class="center-block text-center">Borrower/Loan PD Questionnaire</label>
   <hr>
@@ -21,14 +21,9 @@
         <mat-spinner *ngIf="formService.showSpinner" diameter="25" strokeWidth="4"></mat-spinner>
       </ng-template>
       <app-table *ngIf="formService.showTableAndGraph"></app-table>
-    </mat-step>
-
-    <mat-step>
-      <ng-template matStepLabel>Results Comparison</ng-template>
-      <app-graph *ngIf="formService.showTableAndGraph"></app-graph>
       <div>
-        <button mat-button class="btn btn-primary" (click)="navigateToHomePage()">Done</button>
-        <button mat-button class="btn btn-primary" style="margin-left: 15px" (click)="deleteForm(stepper)">Reset</button>
+        <button mat-button class="btn btn-primary" (click)="onFormSubmit()">Submit</button>
+        <button mat-button class="btn btn-primary" style="margin-left: 15px" (click)="resetStepper(stepper)">Reset</button>
       </div>
     </mat-step>
 

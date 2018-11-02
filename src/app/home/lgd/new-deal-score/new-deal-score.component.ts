@@ -189,7 +189,7 @@ export class NewDealScoreComponent implements OnInit {
           true,
           true),
         // this.downloadPdf();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
       ,
       (error) => {
