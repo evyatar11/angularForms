@@ -55,7 +55,7 @@ export class LgdService {
   }
 
   getDealScoreQuestions() {
-    if (!this.bussinessUnitsCache) {
+    if (!this.dealScoreQuestionCache) {
       this.dealScoreQuestionCache = this.http.get(this.baseUrl+ 'lgd/getLgdQuestions',
       {headers:this.authService.getTokenHeaders()})
       .pipe(
